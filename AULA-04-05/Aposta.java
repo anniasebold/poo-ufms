@@ -20,10 +20,6 @@ class Aposta {
     }
 
     Aposta() {
-
-
-
-      
         this.donoDaAposta = new Apostador();
     }
 
