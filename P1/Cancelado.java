@@ -1,4 +1,4 @@
-class Cancelado {
+public class Cancelado {
   private String nome;
   private int idadeAtual;
   public Cancelamento cancelamento[] = new Cancelamento[5];

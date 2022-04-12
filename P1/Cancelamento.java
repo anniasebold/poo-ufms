@@ -1,4 +1,4 @@
-class Cancelamento {
+public class Cancelamento {
   private String motivo;
   private Boolean perdaPatrocinio;
   public Cancelado cancelado;
