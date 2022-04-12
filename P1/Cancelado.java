@@ -1,6 +1,4 @@
-package p1;
-
-public class Cancelado {
+class Cancelado {
   private String nome;
   private int idadeAtual;
   public Cancelamento cancelamento[] = new Cancelamento[5];

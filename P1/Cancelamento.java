@@ -1,6 +1,4 @@
-package p1;
-
-public class Cancelamento {
+class Cancelamento {
   private String motivo;
   private Boolean perdaPatrocinio;
   public Cancelado cancelado;
