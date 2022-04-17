@@ -24,7 +24,7 @@ public class Cancelado {
     this.idadeAtual = idadeAtual;
   }
 
-  public void setCancelamento(int posicaoAtual) {
-
+  public void setCancelamento(int posicaoAtual, Cancelamento canc) {
+    cancelamento[posicaoAtual] = canc;
   }
 }
