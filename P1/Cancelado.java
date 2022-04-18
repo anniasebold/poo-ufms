@@ -1,7 +1,8 @@
 public class Cancelado {
   private String nome;
   private int idadeAtual;
-  public Cancelamento cancelamento[] = new Cancelamento[5];
+  public Cancelamento cancelamento[] = new Cancelamento[3];
+  private int posicaoAtual = 0;
 
   public Cancelado(String nome, int idadeAtual) {
     setNome(nome);
@@ -24,7 +25,12 @@ public class Cancelado {
     this.idadeAtual = idadeAtual;
   }
 
-  public void setCancelamento(int posicaoAtual, Cancelamento canc) {
-    cancelamento[posicaoAtual] = canc;
+  public void setCancelamento(Cancelamento canc) {
+    if(posicaoAtual > cancelamento.length) {
+      System.out.println("Só pode ser adicionado até 5 cancelamentos.");
+    } else {
+      cancelamento[posicaoAtual] = canc;
+    }
+    posicaoAtual += 1;
   }
 }
