@@ -3,8 +3,8 @@ public class P1 {
     Cancelado c1 = new Cancelado("Monark", 31);
 
     Cancelamento canc1 = new Cancelamento("Nazismo", true);
-    Cancelamento canc2 = new Cancelamento("Nazismo", true);
-    Cancelamento canc3 = new Cancelamento("Nazismo", true);
+    Cancelamento canc2 = new Cancelamento("Homofobia", true);
+    Cancelamento canc3 = new Cancelamento("Assédio", true);
 
     c1.setCancelamento(canc1);
     c1.setCancelamento(canc2);
