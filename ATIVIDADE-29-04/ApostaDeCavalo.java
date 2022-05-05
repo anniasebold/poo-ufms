@@ -1,11 +1,16 @@
-public class ApostaDeBicho extends Aposta {
-  private double numeroDoCavalo;
+public class ApostaDeCavalo extends Aposta {
+  private int numeroDoCavalo;
 
-  public double getNumeroDoCavalo() {
+  public ApostaDeCavalo(int numeroDoCavalo, double valor) {
+    super(valor);
+    setNumeroDoCavalo(numeroDoCavalo);
+  }
+
+  public int getNumeroDoCavalo() {
     return this.numeroDoCavalo;
   }
 
-  public void setNumeroDoCavalo(double numeroDoCavalo) {  
+  public void setNumeroDoCavalo(int numeroDoCavalo) {  
     this.numeroDoCavalo = numeroDoCavalo;
   }
 }

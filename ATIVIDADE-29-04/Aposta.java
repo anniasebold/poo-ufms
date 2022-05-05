@@ -1,6 +1,10 @@
 public class Aposta {
   private double valor, ganho;
 
+  public Aposta(double valor) {
+    setValor(valor);
+  }
+
   public double getValor() {
     return this.valor;
   }
