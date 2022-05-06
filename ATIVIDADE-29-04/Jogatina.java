@@ -4,8 +4,8 @@ public class Jogatina {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
-    ApostaDoBicho apostasB[] = new ApostaDoBicho[2];
-    ApostaDeCavalo apostasC[] = new ApostaDeCavalo[2];
+    ApostaDoBicho apostasB[] = new ApostaDoBicho[10];
+    ApostaDeCavalo apostasC[] = new ApostaDeCavalo[10];
     int opcaoVersao;
     int opcao;
     
@@ -82,7 +82,7 @@ public class Jogatina {
           break;
           // VERSÃO 2.0
           case 2:
-            Aposta apostas[] = new Aposta[4];
+            Aposta apostas[] = new Aposta[10];
             int cont = 0;
             do {
               System.out.println("\nMENU VERSÃO 2");
@@ -120,14 +120,14 @@ public class Jogatina {
                     if(apostas[i] != null) {
                       if(apostas[i] instanceof ApostaDoBicho) {
                         ApostaDoBicho temp = (ApostaDoBicho)apostas[i];
-                        System.out.println("\n Apostas de Bicho: ");
+                        System.out.println("\nAposta de Bicho: ");
                         System.out.println("Dezena 1: " + temp.getDezena1());
                         System.out.println("Dezena 2: " + temp.getDezena2());
                         System.out.println("Valor: " + temp.getValor());
                         System.out.println("-----------------------------------");
                       } else if(apostas[i] instanceof ApostaDeCavalo) {
                         ApostaDeCavalo temp = (ApostaDeCavalo)apostas[i];
-                        System.out.println("\nApostas de Cavalo: ");
+                        System.out.println("\nAposta de Cavalo: ");
                         System.out.println("Dezena 1: " + temp.getNumeroDoCavalo());
                         System.out.println("Valor: " + temp.getValor());
                         System.out.println("-----------------------------------");
