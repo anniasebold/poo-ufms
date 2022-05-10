@@ -3,8 +3,11 @@ import java.util.Scanner;
 public class Main {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    System.out.println("Digite o nome e o cpf");
-    Usuario user = new Usuario(sc.next(), sc.next());
+    Usuario user = new Usuario();
+    System.out.println("Digite o NOME: ");
+    user.setNome(sc.nextLine());
+    System.out.println("Digite o CPF: (Escrito sem pontos e traços)");
+    user.setCpf(sc.nextLine());
   
     System.out.println(user.getCpf() + "\n" + user.getNome());
   }

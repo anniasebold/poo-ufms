@@ -2,6 +2,10 @@ public class Usuario {
   private String nome;
   private String cpf;
 
+  public Usuario() {
+
+  }
+
   public Usuario(String nome, String cpf) {
     setNome(nome);
     setCpf(cpf);
@@ -20,7 +24,7 @@ public class Usuario {
   }
 
   public void setCpf(String cpf) {
-    if (cpf.length() != 14) {
+    if (cpf.length() != 11) {
       System.out.println("CPF inválido.");
     } else {
       this.cpf = cpf.replaceAll("([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})", "$1.$2.$3-$4");
