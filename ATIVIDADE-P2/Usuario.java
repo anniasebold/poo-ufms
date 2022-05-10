@@ -15,7 +15,7 @@ public class Usuario {
     if (nome.length() <= 20) {
       this.nome = nome;
     } else {
-      System.out.println("Nome maior do que o permitido (20 caracteres).");
+      this.nome = nome.substring(0,20);
     }
   }
 
@@ -24,10 +24,10 @@ public class Usuario {
   }
 
   public void setCpf(String cpf) {
-    if (cpf.length() != 11) {
-      System.out.println("CPF inválido.");
-    } else {
+    if (cpf.length() == 11 || cpf.length() == 14) {
       this.cpf = cpf.replaceAll("([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})", "$1.$2.$3-$4");
+    } else {
+      System.out.println("CPF inválido.");
     }
   }
 
