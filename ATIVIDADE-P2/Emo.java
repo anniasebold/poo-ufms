@@ -5,8 +5,10 @@ public class Emo extends UsuarioHumano {
   private String corCabelo;
   DecimalFormat df = new DecimalFormat("#.##");
 
-  public Emo() {
-
+  public Emo(String nome, String cpf, double comprimentoFranja, String corCabelo) {
+    super(nome, cpf);
+    setComprimentoFranja(comprimentoFranja);
+    setCorCabelo(corCabelo);
   }
 
   public void setComprimentoFranja(double comprimentoFranja) {
@@ -20,10 +22,10 @@ public class Emo extends UsuarioHumano {
   public void setCorCabelo(String corCabelo) {
     corCabelo = corCabelo.toUpperCase();
 
-    if (corCabelo != "ROSA" || corCabelo != "VERDE" || corCabelo != "AMARELO") {
-      System.out.println("Cor inválida (Digite entre as opções ROSA / VERDE / AMARELO)");
-    } else {
+    if (corCabelo.equals("ROSA") || corCabelo.equals("VERDE") || corCabelo.equals("AMARELO")) {
       this.corCabelo = corCabelo;
+    } else {
+      System.out.println("Cor inválida (Digite entre as opções ROSA / VERDE / AMARELO)");
     }
   }
 
@@ -32,7 +34,22 @@ public class Emo extends UsuarioHumano {
   }
 
   @Override
-  public void enviarAbraco() {
+  public void enviarAbracoAfinidade() {
+    this.setCorCabelo("ROSA");
+  }
 
+  @Override
+  public void enviarAbracoSemAfinidade() {
+    this.setCorCabelo("VERDE");
+  }
+
+  @Override
+  public void receberAbracoAfinidade() {
+    this.setComprimentoFranja(getComprimentoFranja() + 2);
+  }
+
+  @Override
+  public void receberAbracoSemAfinidade() {
+    this.setComprimentoFranja(getComprimentoFranja() + 1);
   }
 }

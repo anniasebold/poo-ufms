@@ -19,7 +19,22 @@ public class AnimalEstimacao extends Usuario {
   }
   
   @Override
-  public void enviarAbraco() {
-    
+  public void enviarAbracoAfinidade() {
+    System.out.println("Me visite e traga comida assim que a Covid-19 passar");
+  }
+
+  @Override
+  public void enviarAbracoSemAfinidade() {
+    this.enviarAbracoAfinidade();
+  }
+
+  @Override
+  public void receberAbracoAfinidade() {
+    this.setVacinasAtualizadas(true);
+  }
+
+  @Override
+  public void receberAbracoSemAfinidade() {
+    System.out.println("...");
   }
 }
