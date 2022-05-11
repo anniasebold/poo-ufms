@@ -28,6 +28,7 @@ public class AnimalEstimacao extends Usuario {
     System.out.println("------- ANIMAL DE ESTIMAÇÃO -------");
     System.out.println("Tipo do Animal: " + getTipoAnimal());
     System.out.println("As vacinas estão em dia? " + getVacinasAtualizadas());
+    System.out.println("-----------------------------------");
   }
   
   @Override
@@ -43,6 +44,7 @@ public class AnimalEstimacao extends Usuario {
   @Override
   public void receberAbracoAfinidade() {
     this.setVacinasAtualizadas(true);
+    System.out.println("Vacinas atualizadas! Novo status: " + getVacinasAtualizadas());
   }
 
   @Override

@@ -25,7 +25,7 @@ public class Emo extends UsuarioHumano {
     if (corCabelo.equals("ROSA") || corCabelo.equals("VERDE") || corCabelo.equals("AMARELO")) {
       this.corCabelo = corCabelo;
     } else {
-      System.out.println("Cor inválida (Digite entre as opções ROSA / VERDE / AMARELO)");
+      System.out.println("Cor inválida");
     }
   }
   
@@ -36,6 +36,7 @@ public class Emo extends UsuarioHumano {
     System.out.println("CPF: " + getCpf());
     System.out.println("Comprimento da franja: " + getComprimentoFranja());
     System.out.println("Cor do cabelo: " + getCorCabelo());
+    System.out.println("-------------------");
   }
 
   public String getCorCabelo() {
@@ -45,20 +46,24 @@ public class Emo extends UsuarioHumano {
   @Override
   public void enviarAbracoAfinidade() {
     this.setCorCabelo("ROSA");
+    this.imprimeInformacoes();
   }
 
   @Override
   public void enviarAbracoSemAfinidade() {
     this.setCorCabelo("VERDE");
+    this.imprimeInformacoes();
   }
 
   @Override
   public void receberAbracoAfinidade() {
     this.setComprimentoFranja(getComprimentoFranja() + 2);
+    this.imprimeInformacoes();
   }
 
   @Override
   public void receberAbracoSemAfinidade() {
     this.setComprimentoFranja(getComprimentoFranja() + 1);
+    this.imprimeInformacoes();
   }
 }

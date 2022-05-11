@@ -35,18 +35,21 @@ public class Roqueiro extends UsuarioHumano  {
     System.out.println("CPF: " + getCpf());
     System.out.println("Quantidade de Camisas Pretas: " + getQtdCamisasPretas());
     System.out.println("Data que fez a barba pela última vez: " + getDataQueFezBarba());
+    System.out.println("------------------------");
   }
 
   @Override
   public void enviarAbracoAfinidade() {
     this.setQtdCamisasPretas(getQtdCamisasPretas() - 1);
+    this.imprimeInformacoes();
   }
 
   @Override
   public void enviarAbracoSemAfinidade() {
     LocalDateTime agora = LocalDateTime.now();  
-    DateTimeFormatter formatarData = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+    DateTimeFormatter formatarData = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
     this.setDataQueFezBarba(formatarData.format(agora));
+    this.imprimeInformacoes();
   }
 
   @Override
