@@ -1,5 +1,5 @@
 
-public class Roqueiro extends Usuario  {
+public class Roqueiro extends UsuarioHumano  {
   private int qtdCamisasPretas; 
   private String dataQueFezBarba;
 
@@ -17,5 +17,10 @@ public class Roqueiro extends Usuario  {
 
   public String getDataQueFezBarba() {
     return this.dataQueFezBarba;
+  }
+
+  @Override
+  public void enviarAbraco() {
+
   }
 } 

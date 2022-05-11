@@ -1,4 +1,4 @@
-public class AnimalEstimacao {
+public class AnimalEstimacao extends Usuario {
   private String tipoAnimal;
   private boolean vacinasAtualizadas;
 
@@ -16,5 +16,10 @@ public class AnimalEstimacao {
 
   public boolean getVacinasAtualizadas() {
     return vacinasAtualizadas;
+  }
+  
+  @Override
+  public void enviarAbraco() {
+    
   }
 }

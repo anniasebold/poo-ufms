@@ -1,6 +1,6 @@
 import java.text.DecimalFormat;
 
-public class Emo extends Usuario {
+public class Emo extends UsuarioHumano {
   private double comprimentoFranja;
   private String corCabelo;
   DecimalFormat df = new DecimalFormat("#.##");
@@ -10,7 +10,7 @@ public class Emo extends Usuario {
   }
 
   public void setComprimentoFranja(double comprimentoFranja) {
-    this.comprimentoFranja = Double.parseDouble(df.format(comprimentoFranja));
+    this.comprimentoFranja = comprimentoFranja;
   }
 
   public double getComprimentoFranja() {
@@ -31,4 +31,8 @@ public class Emo extends Usuario {
     return this.corCabelo;
   }
 
+  @Override
+  public void enviarAbraco() {
+
+  }
 }
