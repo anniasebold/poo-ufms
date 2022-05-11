@@ -28,6 +28,15 @@ public class Emo extends UsuarioHumano {
       System.out.println("Cor inválida (Digite entre as opções ROSA / VERDE / AMARELO)");
     }
   }
+  
+  @Override
+  public void imprimeInformacoes() {
+    System.out.println("------- EMO -------");
+    System.out.println("Nome: " + getNome());
+    System.out.println("CPF: " + getCpf());
+    System.out.println("Comprimento da franja: " + getComprimentoFranja());
+    System.out.println("Cor do cabelo: " + getCorCabelo());
+  }
 
   public String getCorCabelo() {
     return this.corCabelo;

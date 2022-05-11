@@ -2,6 +2,11 @@ public class AnimalEstimacao extends Usuario {
   private String tipoAnimal;
   private boolean vacinasAtualizadas;
 
+  public AnimalEstimacao(String tipoAnimal, boolean vacinasAtualizadas) {
+    setTipoAnimal(tipoAnimal);
+    setVacinasAtualizadas(vacinasAtualizadas);
+  }
+
   public void setTipoAnimal(String tipoAnimal) {
     this.tipoAnimal = tipoAnimal;
   }
@@ -16,6 +21,13 @@ public class AnimalEstimacao extends Usuario {
 
   public boolean getVacinasAtualizadas() {
     return vacinasAtualizadas;
+  }
+
+  @Override
+  public void imprimeInformacoes() {
+    System.out.println("------- ANIMAL DE ESTIMAÇÃO -------");
+    System.out.println("Tipo do Animal: " + getTipoAnimal());
+    System.out.println("As vacinas estão em dia? " + getVacinasAtualizadas());
   }
   
   @Override

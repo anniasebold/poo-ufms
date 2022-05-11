@@ -5,6 +5,13 @@ public class Roqueiro extends UsuarioHumano  {
   private int qtdCamisasPretas; 
   private String dataQueFezBarba;
 
+  public Roqueiro(String nome, String cpf, int qtdCamisasPretas, String dataQueFezBarba) {
+    setNome(nome);
+    setCpf(cpf);
+    setQtdCamisasPretas(qtdCamisasPretas);
+    setDataQueFezBarba(dataQueFezBarba);
+  }
+
   public void setQtdCamisasPretas (int qtdCamisasPretas) {
     this.qtdCamisasPretas = qtdCamisasPretas;
   }
@@ -19,6 +26,15 @@ public class Roqueiro extends UsuarioHumano  {
 
   public String getDataQueFezBarba() {
     return this.dataQueFezBarba;
+  }
+
+  @Override
+  public void imprimeInformacoes() {
+    System.out.println("------- ROQUEIRO -------");
+    System.out.println("Nome: " + getNome());
+    System.out.println("CPF: " + getCpf());
+    System.out.println("Quantidade de Camisas Pretas: " + getQtdCamisasPretas());
+    System.out.println("Data que fez a barba pela última vez: " + getDataQueFezBarba());
   }
 
   @Override
