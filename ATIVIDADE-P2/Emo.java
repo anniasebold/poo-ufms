@@ -1,9 +1,7 @@
-import java.text.DecimalFormat;
 
 public class Emo extends UsuarioHumano {
   private double comprimentoFranja;
   private String corCabelo;
-  DecimalFormat df = new DecimalFormat("#.##");
 
   public Emo(String nome, String cpf, double comprimentoFranja, String corCabelo) {
     super(nome, cpf);
@@ -34,7 +32,7 @@ public class Emo extends UsuarioHumano {
     System.out.println("------- EMO -------");
     System.out.println("Nome: " + getNome());
     System.out.println("CPF: " + getCpf());
-    System.out.println("Comprimento da franja: " + getComprimentoFranja());
+    System.out.println("Comprimento da franja: " +  String.format("%.2f", getComprimentoFranja()));
     System.out.println("Cor do cabelo: " + getCorCabelo());
     System.out.println("-------------------");
   }

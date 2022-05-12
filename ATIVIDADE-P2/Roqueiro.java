@@ -37,7 +37,7 @@ public class Roqueiro extends UsuarioHumano  {
     System.out.println("Data que fez a barba pela última vez: " + getDataQueFezBarba());
     System.out.println("------------------------");
   }
-
+  
   @Override
   public void enviarAbracoAfinidade() {
     this.setQtdCamisasPretas(getQtdCamisasPretas() - 1);
@@ -55,6 +55,8 @@ public class Roqueiro extends UsuarioHumano  {
   @Override
   public void receberAbracoAfinidade() {
     System.out.println("Rock'n'roll baby");
+    this.setQtdCamisasPretas(getQtdCamisasPretas() + 1);
+    this.imprimeInformacoes();
   }
 
   @Override
