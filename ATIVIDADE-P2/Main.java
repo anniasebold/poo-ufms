@@ -16,6 +16,7 @@ public class Main {
       System.out.println("4. Imprimir lista de cadastrados");
       System.out.println("5. Enviar abraço");
       System.out.println("6. Sair");
+      System.out.printf("Digite uma opção: ");
       numOpcao = sc.nextInt();
 
       switch(numOpcao) {
@@ -62,6 +63,7 @@ public class Main {
           boolean vacinasAtualizadas = sc.nextBoolean();
           sc.nextLine();
           usuarios[cont] = new AnimalEstimacao(tipoAnimal, vacinasAtualizadas);
+          cont += 1;
           break;
         case 4:
           System.out.println("Lista de usuários: ");
