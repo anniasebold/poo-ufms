@@ -84,7 +84,7 @@ public class Main {
             usuarios[numUsuarioSend].enviarAbracoAfinidade();
             usuarios[numUsuarioReceive].receberAbracoAfinidade();
           } else if(usuarios[numUsuarioReceive] instanceof AnimalEstimacao) {
-            if(usuarios[numUsuarioSend] instanceof AnimalEstimacao || usuarios[numUsuarioSend] instanceof Roqueiro) {
+            if(usuarios[numUsuarioSend] instanceof Roqueiro) {
               usuarios[numUsuarioSend].enviarAbracoSemAfinidade();
               usuarios[numUsuarioReceive].receberAbracoAfinidade();
             } else {
