@@ -13,4 +13,8 @@ public class VeiculoAereo extends Veiculo {
   public double getVelocidade() {
     return this.velocidade;
   }
+
+  public void voar() {
+    System.out.println("Estou voando");
+  }
 }
