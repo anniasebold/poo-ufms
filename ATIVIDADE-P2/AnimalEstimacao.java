@@ -30,25 +30,18 @@ public class AnimalEstimacao extends Usuario {
     System.out.println("As vacinas estão em dia? " + getVacinasAtualizadas());
     System.out.println("-----------------------------------");
   }
-  
+
   @Override
-  public void enviarAbracoAfinidade() {
+  public void enviaAbraco(Usuario receiver) {
     System.out.println("Me visite e traga comida assim que a Covid-19 passar");
+    receiver.recebeAbraco(this);
   }
 
   @Override
-  public void enviarAbracoSemAfinidade() {
-    this.enviarAbracoAfinidade();
-  }
-
-  @Override
-  public void receberAbracoAfinidade() {
-    this.setVacinasAtualizadas(true);
-    System.out.println("Vacinas atualizadas! Novo status: " + getVacinasAtualizadas());
-  }
-
-  @Override
-  public void receberAbracoSemAfinidade() {
-    System.out.println("...");
+  public void recebeAbraco(Usuario sender) {
+    if (sender instanceof AnimalEstimacao || sender instanceof Roqueiro) {
+      this.setVacinasAtualizadas(true);
+      System.out.println("Vacinas atualizadas! Novo status: " + getVacinasAtualizadas());
+    }
   }
 }

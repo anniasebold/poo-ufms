@@ -2,10 +2,6 @@ public abstract class UsuarioHumano extends Usuario {
   private String nome;
   private String cpf;
 
-  public UsuarioHumano() {
-
-  }
-
   public UsuarioHumano(String nome, String cpf) {
     setNome(nome);
     setCpf(cpf);

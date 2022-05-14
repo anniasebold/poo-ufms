@@ -1,7 +1,5 @@
 public abstract class Usuario {
-  public abstract void enviarAbracoAfinidade();
-  public abstract void enviarAbracoSemAfinidade();
-  public abstract void receberAbracoAfinidade();
-  public abstract void receberAbracoSemAfinidade();
+  public abstract void enviaAbraco(Usuario receiver);
+  public abstract void recebeAbraco(Usuario usuario);
   public abstract void imprimeInformacoes();
 }

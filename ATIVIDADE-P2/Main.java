@@ -76,25 +76,11 @@ public class Main {
           break;
         case 5:
           System.out.println("Enviar abraço: ");
-          System.out.println("Qual o seu usuário (número):");
+          System.out.println("Qual o número do seu usuário:");
           int numUsuarioSend = sc.nextInt();
-          System.out.println("Qual o usuário que deseja enviar o abraço (número):");
+          System.out.println("Qual o número do usuário que deseja enviar o abraço:");
           int numUsuarioReceive = sc.nextInt();
-          if((usuarios[numUsuarioSend].getClass()).equals((usuarios[numUsuarioReceive]).getClass())) {
-            usuarios[numUsuarioSend].enviarAbracoAfinidade();
-            usuarios[numUsuarioReceive].receberAbracoAfinidade();
-          } else if(usuarios[numUsuarioReceive] instanceof AnimalEstimacao) {
-            if(usuarios[numUsuarioSend] instanceof Roqueiro) {
-              usuarios[numUsuarioSend].enviarAbracoSemAfinidade();
-              usuarios[numUsuarioReceive].receberAbracoAfinidade();
-            } else {
-              usuarios[numUsuarioSend].enviarAbracoSemAfinidade();
-              usuarios[numUsuarioReceive].receberAbracoSemAfinidade();
-            }
-          } else {
-            usuarios[numUsuarioSend].enviarAbracoSemAfinidade();
-            usuarios[numUsuarioReceive].receberAbracoSemAfinidade();
-          }
+          usuarios[numUsuarioSend].enviaAbraco(usuarios[numUsuarioReceive]);
           break;
           case 6:
             System.out.println("Até a próxima!");

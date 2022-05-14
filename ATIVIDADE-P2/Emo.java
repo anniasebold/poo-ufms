@@ -42,26 +42,23 @@ public class Emo extends UsuarioHumano {
   }
 
   @Override
-  public void enviarAbracoAfinidade() {
-    this.setCorCabelo("ROSA");
+  public void enviaAbraco(Usuario receiver) {
+    if(receiver instanceof Emo) {
+      this.setCorCabelo("ROSA");
+    } else {
+      this.setCorCabelo("VERDE");
+    }
     this.imprimeInformacoes();
+    receiver.recebeAbraco(this);
   }
 
   @Override
-  public void enviarAbracoSemAfinidade() {
-    this.setCorCabelo("VERDE");
-    this.imprimeInformacoes();
-  }
-
-  @Override
-  public void receberAbracoAfinidade() {
-    this.setComprimentoFranja(getComprimentoFranja() + 2);
-    this.imprimeInformacoes();
-  }
-
-  @Override
-  public void receberAbracoSemAfinidade() {
-    this.setComprimentoFranja(getComprimentoFranja() + 1);
+  public void recebeAbraco(Usuario sender) {
+    if(sender instanceof Emo) {
+      this.setComprimentoFranja(getComprimentoFranja() + 2);
+    } else {
+      this.setComprimentoFranja(getComprimentoFranja() + 1);
+    }
     this.imprimeInformacoes();
   }
 }
