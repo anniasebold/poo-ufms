@@ -17,4 +17,9 @@ public class VeiculoAereo extends Veiculo {
   public void voar() {
     System.out.println("Estou voando");
   }
+
+  @Override
+  public String toString() {
+    return "Peso " + getPeso() + " / Velocidade " + getVelocidade();
+  }
 }
