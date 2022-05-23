@@ -92,14 +92,11 @@ class Pais {
     int cont = 0;
     Pais paisesVizinhos[] = new Pais[20];
     for(int i = 0; i < paisesFronteiras.length; i++) {
-      for(int y = 0; y < pais.paisesFronteiras.length; i++) {
+      for(int y = 0; y < pais.paisesFronteiras.length; y++) {
         if(paisesFronteiras[i] != null && pais.paisesFronteiras[y] != null) {
-          System.out.println(paisesFronteiras[i].getCodIso() + " " + pais.paisesFronteiras[y].getCodIso());
-          System.out.println("entrou 1");
           if(paisesFronteiras[i].equals(pais.paisesFronteiras[y])) {
-            System.out.println("entrou");
-            System.out.println(paisesFronteiras[i].getCodIso() + " " + pais.paisesFronteiras[y].getCodIso());
             paisesVizinhos[cont] = paisesFronteiras[i];
+            System.out.println("País vizinho: " + paisesVizinhos[cont].getNome());
             cont++;
           }
         }
