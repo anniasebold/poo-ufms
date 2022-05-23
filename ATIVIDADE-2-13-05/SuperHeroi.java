@@ -40,11 +40,11 @@ public abstract class SuperHeroi implements Comportamento {
 
   private void setEstadoDeSaude() {
     if(getNivelDeResistencia() >= 0 && getNivelDeResistencia() <= 30) {
-      this.estadoDeSaude.equals("Ruim");
+      this.estadoDeSaude = "Ruim";
     } else if(getNivelDeResistencia() >= 31 && getNivelDeResistencia() <= 70) {
-      this.estadoDeSaude.equals("Bom");
+      this.estadoDeSaude = "Bom";
     } else if(getNivelDeResistencia() >= 71 && getNivelDeResistencia() <= 100) {
-      this.estadoDeSaude.equals("Excelente");
+      this.estadoDeSaude = "Excelente";
     }
   }
 

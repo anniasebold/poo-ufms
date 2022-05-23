@@ -1,15 +1,20 @@
 public class Ciclope extends SuperHeroi {
   private enum oculos {Oakley, HB, Rayban};
 
+  public Ciclope(String nomeOriginal, String descricao, String paisNatal, int nivelDeResistencia) {
+    super(nomeOriginal, descricao, paisNatal, nivelDeResistencia);
+  }
+
   @Override
   public void machucar(SuperHeroi heroi) {
     if(heroi instanceof Wolverine) {
-    } else {
-      this.setNivelDeResistencia(heroi.getNivelDeResistencia() - 10);
+      Wolverine temp = (Wolverine)heroi;
+      temp.setTempoCicatrizacao(temp.getTempoCicatrizacao() + 5);
     }
+    heroi.setNivelDeResistencia(heroi.getNivelDeResistencia() - 10);
   }
   @Override
   public void ajudar(SuperHeroi heroi) {
-    this.setNivelDeResistencia(heroi.getNivelDeResistencia() + 10);
+    heroi.setNivelDeResistencia(heroi.getNivelDeResistencia() + 10);
   }
 }

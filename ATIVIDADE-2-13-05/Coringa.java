@@ -3,7 +3,7 @@ public class Coringa implements Comportamento {
 
   @Override
   public void machucar(SuperHeroi heroi) {
-    heroi.setNivelDeResistencia(heroi.getNivelDeResistencia() - 1);
+    heroi.setNivelDeResistencia(1);
   }
   @Override
   public void ajudar(SuperHeroi heroi) {

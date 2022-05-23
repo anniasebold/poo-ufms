@@ -27,12 +27,14 @@ public class Wolverine extends SuperHeroi {
   @Override
   public void machucar(SuperHeroi heroi) {
     if(heroi instanceof HomemDeFerro) {
-    } else {
-      this.setNivelDeResistencia(heroi.getNivelDeResistencia() - 1);
-    }
+      HomemDeFerro temp = (HomemDeFerro)heroi;
+      temp.setQtdNamoradas(temp.getQtdNamoradas() - 1);
+      heroi = temp;
+    } 
+    heroi.setNivelDeResistencia(heroi.getNivelDeResistencia() - 1);
   }
   @Override
   public void ajudar(SuperHeroi heroi) {
-    this.setNivelDeResistencia(heroi.getNivelDeResistencia() + 20);
+    heroi.setNivelDeResistencia(heroi.getNivelDeResistencia() + 20);
   }
 }
