@@ -1,5 +1,4 @@
 public class Ciclope extends SuperHeroi {
-  private enum oculos {Oakley, HB, Rayban};
 
   public Ciclope(String nomeOriginal, String descricao, String paisNatal, int nivelDeResistencia) {
     super(nomeOriginal, descricao, paisNatal, nivelDeResistencia);

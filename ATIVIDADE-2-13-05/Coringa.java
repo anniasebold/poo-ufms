@@ -1,5 +1,17 @@
 public class Coringa implements Comportamento {
-  public enum NomePais { BRA, USA, CAN };
+  private String pais;
+
+  public Coringa(String pais) {
+    setPais(pais);
+  }
+
+  public void setPais(String pais) {
+    this.pais = pais;
+  }
+
+  public String getPais() {
+    return this.pais;
+  }
 
   @Override
   public void machucar(SuperHeroi heroi) {

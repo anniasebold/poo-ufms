@@ -10,5 +10,9 @@ public class TesteSuperHeroi {
 
     System.out.println(hf.getQtdNamoradas());
     System.out.println(wolverine.getTempoCicatrizacao());
+
+    Coringa co = new Coringa("Brasil");
+    co.machucar(ciclope);
+    System.out.println(ciclope.getNivelDeResistencia());
   }
 }
