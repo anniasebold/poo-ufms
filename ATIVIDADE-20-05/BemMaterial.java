@@ -1,7 +1,11 @@
-public abstract class BemMaterial implements Padrao {
+public abstract class BemMaterial extends BensHeranca implements Padrao {
   private int anoCompra;
   private boolean bomEstado;
-  private double valor;
+
+  public BemMaterial(int anoCompra, boolean bomEstado) {
+    setAnoCompra(anoCompra);
+    setBomEstado(bomEstado);
+  }
 
   public void setAnoCompra(int anoCompra) {
     this.anoCompra = anoCompra;
@@ -20,25 +24,15 @@ public abstract class BemMaterial implements Padrao {
   }
 
   @Override
-  public void calculaValor() {
+  public void calculaValor(Padrao item) {
     if(getBomEstado() == true) {
       for(int i = getAnoCompra(); i < 2022; i++) {
-        setValor(1000);
+        setValor(BensHeranca.getValor() + 1000);
       }
     } else {
       for(int i = getAnoCompra(); i < 2022; i++) {
-        setValor(1000);
+        setValor(BensHeranca.getValor() + 500);
       }
     }
-  }
-
-  @Override
-  public void setValor(double valor) {
-    this.valor += valor;
-  }
-
-  @Override
-  public double getValor() {
-    return this.valor;
   }
 }

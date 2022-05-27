@@ -1,7 +1,14 @@
 public class Rap extends FaixaMusical {
   private String estilo;
-  private String paisesQueFoiTocada[] = new String[5];
+  public String paisesQueFoiTocada[] = new String[5];
   int cont = 0;
+
+  public Rap(String nome, String dataComposicao, int qtdReps, String estilo, String nomePais) {
+    super(nome, dataComposicao, qtdReps);
+    setEstilo(estilo);
+    setPaisesQueFoiTocada(nomePais);
+    this.calculaValor(this);
+  }
 
   public void setEstilo(String estilo) {
     estilo.toUpperCase();
@@ -28,21 +35,5 @@ public class Rap extends FaixaMusical {
 
   public String[] getPaisesQueFoiTocada() {
     return paisesQueFoiTocada;
-  }
-
-  public void calculaValor() {
-    if (getEstilo() == "FREESTYLE") {
-      setValor(10000);
-    } else if(getEstilo() == "FLOW" || getEstilo() == "GANGSTA") {
-      setValor(1000);
-      for(int i = 0; i < getPaisesQueFoiTocada().length; i++) {
-        if(paisesQueFoiTocada[i] == "JAPAO") {
-          setValor(15000);
-        } else {
-          setValor(500);
-        }
-      }
-      setValor(10000);
-    }
   }
 }

@@ -2,6 +2,13 @@ public class Camiseta extends BemMaterial {
   private int tamanho;
   private String cor;
 
+  public Camiseta(int anoCompra, boolean bomEstado, int tamanho, String cor) {
+    super(anoCompra, bomEstado);
+    setTamanho(tamanho);
+    setCor(cor);
+    this.calculaValor(this);
+  }
+
   public void setCor(String cor) {
     this.cor = cor;
   }
@@ -17,6 +24,4 @@ public class Camiseta extends BemMaterial {
   public int getTamanho() {
     return this.tamanho;
   }
-
-  public void calculaValor() {}
 }

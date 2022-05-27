@@ -1,7 +1,14 @@
 public class Funk extends FaixaMusical {
   private boolean estiloProibidao;
-  private String parceirosComposicao[] = new String[10];
+  public String parceirosComposicao[] = new String[10];
   int cont = 0;
+
+  public Funk(String nome, String dataComposicao, int qtdReps, boolean estiloProibidao, String nomeParceiro) {
+    super(nome, dataComposicao, qtdReps);
+    setEstiloProibidao(estiloProibidao);
+    setParceirosComposicao(nomeParceiro);
+    this.calculaValor(this);
+  }
 
   public void setEstiloProibidao(boolean estiloProibidao) {
     this.estiloProibidao = estiloProibidao;
@@ -13,6 +20,7 @@ public class Funk extends FaixaMusical {
 
   public void setParceirosComposicao(String nome) {
     if(parceirosComposicao[cont] == null) {
+      nome.toUpperCase();
       parceirosComposicao[cont] = nome;
       cont++;
     }
@@ -20,21 +28,5 @@ public class Funk extends FaixaMusical {
 
   public String[] getParceirosComposicao() {
     return parceirosComposicao;
-  }
-  
-  public void calculaValor() {
-    if(getEstiloProibidao() == true) {
-      setValor(1000);
-    } else {
-      for(int i = 0; i < parceirosComposicao.length; i++) {
-        if(parceirosComposicao[i] != null) {
-          if(parceirosComposicao[i] == "Valesca Popozuda") {
-            setValor(100000);
-          } else {
-            setValor(50000);
-          }
-        }
-      }
-    }
   }
 }
