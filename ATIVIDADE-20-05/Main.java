@@ -8,7 +8,17 @@ public class Main {
     faixas[2] = new Pop("Popzao do catra", "01/12/2015", 200, 1000, 3);
 
     bens[0] = new Camiseta(2020, true, 32, "Amarelo");
-    System.out.println(BensHeranca.getValor());
+
+    System.out.println("Herança total = " + BensHeranca.getValor());
+
+    double valorEsposas = (BensHeranca.getValor() / 2) / 3;
+    System.out.println("Esposa = " + valorEsposas);
+
+    double valorFilhos = (BensHeranca.getValor() / 4) / 32;
+    System.out.println("Filho = " + valorFilhos);
+
+    double valorNetos = (BensHeranca.getValor() / 4) / 4;
+    System.out.println("Neto = " + valorNetos);
   }
 
 }
