@@ -12,13 +12,13 @@ public class Main {
     System.out.println("Herança total = " + BensHeranca.getValor());
 
     double valorEsposas = (BensHeranca.getValor() / 2) / 3;
-    System.out.println("Esposa = " + valorEsposas);
+    System.out.println("Esposas = " + valorEsposas);
 
     double valorFilhos = (BensHeranca.getValor() / 4) / 32;
-    System.out.println("Filho = " + valorFilhos);
+    System.out.println("Filhos = " + valorFilhos);
 
     double valorNetos = (BensHeranca.getValor() / 4) / 4;
-    System.out.println("Neto = " + valorNetos);
+    System.out.println("Netos = " + valorNetos);
   }
 
 }
