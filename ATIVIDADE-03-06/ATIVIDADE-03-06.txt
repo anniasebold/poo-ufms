@@ -1,0 +1,41 @@
+/*
+  Na classe MegaBacana foi criado um método chamado vamosBacanar que recebe uma interface do tipo Bacana
+  Esse método foi chamado na main e foi criada uma classe anônima que implementa o método ser gentil passando o int b que foi passado
+  dentro da classe MegaBacana, que é 100.
+
+  Se a classe Bacana só tem um método implementado não é necessário colocar o "new Bacana" e declarar o método para depois dar instruções
+  pra ele, passa-se só o comportamento do método, daí é implementado um Lambda.
+  Ao passar entre parenteses o (b) => o Java sabe que você está passando o comportamento do método serGentil, pois o método vamosBacanar
+  espera uma interface do tipo Bacana que por sua vez só tem o método SerGentil
+
+*/
+
+
+public interface Bacana {
+  void serGentil(int bonzinho);
+}
+
+public class MegaBacana {
+  // Atributos, construtores, setters e getters
+ 
+  public void vamosBacanar(Bacana b) {
+      b.serGentil(100);
+  } 
+}
+
+public class Gentileza {
+  public static void main(String[] args) {
+      MegaBacana mb = new MegaBacana();
+      mb.vamosBacanar(new Bacana() {
+        public void serGentil(int b) {
+          System.out.println("Sou muito bacana! Vou doar... " + b + " reais");
+        }
+      });
+
+      // mb.vamosBacanar(
+      //     (b) -> { 
+      //         System.out.println("Sou muito bacana! Vou doar... " + b + " reais");
+      //     }
+      // );
+  }
+}
