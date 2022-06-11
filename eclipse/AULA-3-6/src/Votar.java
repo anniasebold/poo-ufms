@@ -18,8 +18,6 @@ public class Votar implements ActionListener {
 		this.contadorEymael = contadorEymael;
 	}
 
-
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
