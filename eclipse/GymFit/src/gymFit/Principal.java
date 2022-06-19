@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 
@@ -30,6 +31,7 @@ public class Principal extends JFrame {
 	private void prepararJanela() {
 		setSize(750, 850);
 		setLayout(new BorderLayout());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	private void organizarComponentes() {
@@ -38,6 +40,7 @@ public class Principal extends JFrame {
 		aluno = new JButton("Aluno");
 		equipamento = new JButton("Equipamento");
 		instrutor = new JButton("Instrutor");
+		telaSelecionada = new JFrame();
 		sair = new JButton("Sair");
 		status = new JLabel("Status: ");
 		barraRodape = new JMenuBar();
@@ -53,17 +56,24 @@ public class Principal extends JFrame {
 		barraTopo.add(instrutor);
 		barraTopo.add(sair);
 		
+		add(telaSelecionada, BorderLayout.CENTER);
+		
 		add(barraRodape, BorderLayout.SOUTH);
 		barraRodape.add(status);
 		
 	}
 	
 	private void organizarEventos() {
+		modalidade.addActionListener(
+				(event) -> {
+					Modalidade modalidade = new Modalidade();
+					telaSelecionada.add(modalidade);
+		});
+		
 		sair.addActionListener(
 			(event) -> {
 				setVisible(false);
-			}		
-		);
+		});
 	}
 	
 	private void finalizar() {
