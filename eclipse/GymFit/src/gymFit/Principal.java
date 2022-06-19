@@ -3,7 +3,9 @@ package gymFit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
@@ -11,12 +13,14 @@ import java.awt.BorderLayout;
 public class Principal extends JFrame {
 	
 	private JMenuBar barraTopo;
-	private JButton modalidade;
-	private JButton aluno;
-	private JButton equipamento;
-	private JButton instrutor;
-	private JFrame telaSelecionada;
-	private JButton sair;
+	private JMenu modalidade;
+	private JMenuItem opcoesModalidade;
+	private JMenu aluno;
+	private JMenu equipamento;
+	private JMenu instrutor;
+	private JMenu sair;
+	private JMenuItem exit;
+	private JPanel telaSelecionada;
 	private JMenuBar barraRodape;
 	private JLabel status;
 		
@@ -29,50 +33,54 @@ public class Principal extends JFrame {
 	}
 	
 	private void prepararJanela() {
-		setSize(750, 850);
+		setTitle("GymFit");
+		setSize(750, 750);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	private void organizarComponentes() {
 		barraTopo = new JMenuBar();
-		modalidade = new JButton("Modalidade");
-		aluno = new JButton("Aluno");
-		equipamento = new JButton("Equipamento");
-		instrutor = new JButton("Instrutor");
-		telaSelecionada = new JFrame();
-		sair = new JButton("Sair");
-		status = new JLabel("Status: ");
+		modalidade = new JMenu("Modalidade");
+		opcoesModalidade = new JMenuItem("Menu");
+		aluno = new JMenu("Aluno");
+		equipamento = new JMenu("Equipamento");
+		instrutor = new JMenu("Instrutor");
+		sair = new JMenu("Sair");
+		exit = new JMenuItem("Exit");
+		telaSelecionada = new JPanel();
 		barraRodape = new JMenuBar();
+		status = new JLabel("Status: ");
 		
 		this.setJMenuBar(barraTopo);
 		this.setJMenuBar(barraRodape);
 		
 		
-		add(barraTopo, BorderLayout.NORTH);
+		add(barraTopo, BorderLayout.PAGE_START);
 		barraTopo.add(modalidade);
 		barraTopo.add(aluno);
 		barraTopo.add(equipamento);
 		barraTopo.add(instrutor);
 		barraTopo.add(sair);
+		modalidade.add(opcoesModalidade);
+		sair.add(exit);
 		
-		add(telaSelecionada, BorderLayout.CENTER);
+		add(telaSelecionada);
 		
-		add(barraRodape, BorderLayout.SOUTH);
+		add(barraRodape, BorderLayout.PAGE_END);
 		barraRodape.add(status);
-		
 	}
 	
 	private void organizarEventos() {
-		modalidade.addActionListener(
+		opcoesModalidade.addActionListener(
 				(event) -> {
 					Modalidade modalidade = new Modalidade();
 					telaSelecionada.add(modalidade);
 		});
 		
-		sair.addActionListener(
+		exit.addActionListener(
 			(event) -> {
-				setVisible(false);
+				this.setVisible(false);
 		});
 	}
 	
