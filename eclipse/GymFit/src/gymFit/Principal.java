@@ -10,10 +10,12 @@ import java.awt.BorderLayout;
 public class Principal extends JFrame {
 	
 	private JMenuBar barraTopo;
-	private JButton academia;
+	private JButton modalidade;
 	private JButton aluno;
 	private JButton equipamento;
 	private JButton instrutor;
+	private JFrame telaSelecionada;
+	private JButton sair;
 	private JMenuBar barraRodape;
 	private JLabel status;
 		
@@ -21,6 +23,7 @@ public class Principal extends JFrame {
 		super("Principal");
 		prepararJanela();
 		organizarComponentes();
+		organizarEventos();
 		finalizar();
 	}
 	
@@ -31,10 +34,11 @@ public class Principal extends JFrame {
 	
 	private void organizarComponentes() {
 		barraTopo = new JMenuBar();
-		academia = new JButton("Academia");
+		modalidade = new JButton("Modalidade");
 		aluno = new JButton("Aluno");
 		equipamento = new JButton("Equipamento");
 		instrutor = new JButton("Instrutor");
+		sair = new JButton("Sair");
 		status = new JLabel("Status: ");
 		barraRodape = new JMenuBar();
 		
@@ -43,14 +47,23 @@ public class Principal extends JFrame {
 		
 		
 		add(barraTopo, BorderLayout.NORTH);
-		barraTopo.add(academia);
+		barraTopo.add(modalidade);
 		barraTopo.add(aluno);
 		barraTopo.add(equipamento);
 		barraTopo.add(instrutor);
+		barraTopo.add(sair);
 		
 		add(barraRodape, BorderLayout.SOUTH);
 		barraRodape.add(status);
 		
+	}
+	
+	private void organizarEventos() {
+		sair.addActionListener(
+			(event) -> {
+				setVisible(false);
+			}		
+		);
 	}
 	
 	private void finalizar() {
