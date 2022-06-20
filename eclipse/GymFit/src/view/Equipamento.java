@@ -13,27 +13,30 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import model.InstrutorDAO;
-import model.InstrutorListagem;
+import model.EquipamentoDAO;
+import model.EquipamentoListagem;
 
-public class Instrutor extends JPanel {
+public class Equipamento extends JPanel {
+
 	private JLabel titulo;
 	private JLabel nome;
-	private JLabel valor;
+	private JLabel musculoTrab;
+	private JLabel estado;
 	private JTextField inputNome;
-	private JTextField inputFormacao;
+	private JTextField inputMusculoTrab;
+	private JTextField inputEstado;
 	private JButton salvar;
 	private JButton editar;
 	private JButton excluir;
 	private JButton selecionarLinha;
-	
-	private JTable tabelaInstrutores = new JTable();
-	InstrutorListagem listaInstrutores = new InstrutorListagem();
 
-	String colunas[] = { "Nome", "Formação" };
+	private JTable tabelaInstrutores = new JTable();
+	EquipamentoListagem listaEquipamentos = new EquipamentoListagem();
+
+	String colunas[] = { "Nome", "Músculo Trabalhado", "Estado" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
-	public Instrutor() {
+	public Equipamento() {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
@@ -49,7 +52,7 @@ public class Instrutor extends JPanel {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(5, 5, 5, 5);
 
-		titulo = new JLabel("Menu de Instrutores");
+		titulo = new JLabel("Menu de Equipamento");
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		add(titulo, gbc);
@@ -64,35 +67,45 @@ public class Instrutor extends JPanel {
 		gbc.gridy = 1;
 		add(inputNome, gbc);
 
-		valor = new JLabel("Formação ");
+		musculoTrab = new JLabel("Músculo Trabalhado ");
 		gbc.gridx = 0;
 		gbc.gridy = 2;
-		add(valor, gbc);
-
-		inputFormacao = new JTextField(30);
+		add(musculoTrab, gbc);
+		
+		inputMusculoTrab = new JTextField(30);
 		gbc.gridx = 1;
 		gbc.gridy = 2;
-		add(inputFormacao, gbc);
+		add(inputMusculoTrab, gbc);
+
+		estado = new JLabel("Estado ");
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		add(estado, gbc);
+
+		inputEstado = new JTextField(30);
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		add(inputEstado, gbc);
 
 		salvar = new JButton("Salvar");
 		gbc.gridx = 1;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		add(salvar, gbc);
 
 		selecionarLinha = new JButton("Selecionar Registro");
 		gbc.gridx = 1;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		add(selecionarLinha, gbc);
-		
+
 		editar = new JButton("Editar");
 		gbc.gridx = 1;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		add(editar, gbc);
 		editar.setVisible(false);
 
 		excluir = new JButton("Excluir");
 		gbc.gridx = 1;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		add(excluir, gbc);
 
 		tabelaInstrutores.setModel(modelo);
@@ -103,21 +116,27 @@ public class Instrutor extends JPanel {
 		add(new JScrollPane(tabelaInstrutores), gbc);
 
 	}
-
+	
 	private void organizarEventos() {
 		salvar.addActionListener((event) -> {
 			String nome = inputNome.getText();
-			String formacao = inputFormacao.getText();
+			String musculoTrab = inputMusculoTrab.getText();
+			String estado = inputEstado.getText();
 
-			InstrutorDAO instrutor = new InstrutorDAO(nome, formacao);
-			listaInstrutores.adicionar(instrutor);
+			EquipamentoDAO equipamento = new EquipamentoDAO(nome, musculoTrab, estado);
+			listaEquipamentos.adicionar(equipamento);
 
 			inputNome.setText("");
-			inputFormacao.setText("");
+			inputMusculoTrab.setText("");
+			inputEstado.setText("");
 			modelo.setRowCount(0);
 
-			for (int i = 0; i < listaInstrutores.getSize(); i++) {
-				Object[] lista = { listaInstrutores.getOne(i).getNome(), listaInstrutores.getOne(i).getFormacao() };
+			for (int i = 0; i < listaEquipamentos.getSize(); i++) {
+				Object[] lista = { 
+						listaEquipamentos.getOne(i).getNome(), 
+						listaEquipamentos.getOne(i).getMusculoTrab(), 
+						listaEquipamentos.getOne(i).getEstado(), 
+				};
 
 				modelo.addRow(lista);
 			}
@@ -127,10 +146,11 @@ public class Instrutor extends JPanel {
 			int linhaSelecionada = tabelaInstrutores.getSelectedRow();
 			if (linhaSelecionada != -1) {
 				inputNome.setText(tabelaInstrutores.getValueAt(linhaSelecionada, 0).toString());
-				inputFormacao.setText(tabelaInstrutores.getValueAt(linhaSelecionada, 1).toString());
+				inputMusculoTrab.setText(tabelaInstrutores.getValueAt(linhaSelecionada, 1).toString());
+				inputEstado.setText(tabelaInstrutores.getValueAt(linhaSelecionada, 2).toString());
 				editar.setVisible(true);
 			} else {
-				JOptionPane.showMessageDialog(null, "Selecione um instrutor.");
+				JOptionPane.showMessageDialog(null, "Selecione um equipamento.");
 			}
 		});
 
@@ -138,29 +158,32 @@ public class Instrutor extends JPanel {
 			int linhaSelecionada = tabelaInstrutores.getSelectedRow();
 
 			String nome = inputNome.getText();
-			String formacao = inputFormacao.getText();
-			InstrutorDAO instrutorEditado = new InstrutorDAO(nome, formacao);
+			String musculoTrab = inputMusculoTrab.getText();
+			String estado = inputEstado.getText();
+			EquipamentoDAO equipamentoEditado = new EquipamentoDAO(nome, musculoTrab, estado);
 
 			inputNome.setText("");
-			inputFormacao.setText("");
+			inputMusculoTrab.setText("");
+			inputEstado.setText("");
 
-			listaInstrutores.editRegister(linhaSelecionada, instrutorEditado);
+			listaEquipamentos.editRegister(linhaSelecionada, equipamentoEditado);
 
 			tabelaInstrutores.setValueAt(nome, linhaSelecionada, 0);
-			tabelaInstrutores.setValueAt(formacao, linhaSelecionada, 1);
+			tabelaInstrutores.setValueAt(musculoTrab, linhaSelecionada, 1);
+			tabelaInstrutores.setValueAt(estado, linhaSelecionada, 2);
 
 		});
 
 		excluir.addActionListener((event) -> {
 			int linhaSelecionada = tabelaInstrutores.getSelectedRow();
 			if (linhaSelecionada != -1) {
-				listaInstrutores.removeRegister(linhaSelecionada);
+				listaEquipamentos.removeRegister(linhaSelecionada);
 				modelo.removeRow(linhaSelecionada);
 			} else {
-				JOptionPane.showMessageDialog(null, "Selecione um instrutor para ser excluído.");
+				JOptionPane.showMessageDialog(null, "Selecione um equipamento para ser excluído.");
 			}
 		});
-
+		
 	}
 
 	private void finalizar() {

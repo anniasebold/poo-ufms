@@ -18,6 +18,7 @@ public class Principal extends JFrame {
 	private JMenu aluno;
 	private JMenuItem opcoesAluno;
 	private JMenu equipamento;
+	private JMenuItem opcoesEquipamento;
 	private JMenu instrutor;
 	private JMenuItem opcoesInstrutor;
 	private JMenu sair;
@@ -29,6 +30,7 @@ public class Principal extends JFrame {
 	Modalidade modalidadeView = new Modalidade();
 	Aluno alunoView = new Aluno();
 	Instrutor instrutorView = new Instrutor();
+	Equipamento equipamentoView = new Equipamento();
 
 	public Principal() {
 		super("Principal");
@@ -52,6 +54,7 @@ public class Principal extends JFrame {
 		aluno = new JMenu("Aluno");
 		opcoesAluno = new JMenuItem("Menu");
 		equipamento = new JMenu("Equipamento");
+		opcoesEquipamento = new JMenuItem("Menu");
 		instrutor = new JMenu("Instrutor");
 		opcoesInstrutor = new JMenuItem("Menu");
 		sair = new JMenu("Sair");
@@ -69,6 +72,7 @@ public class Principal extends JFrame {
 		barraTopo.add(aluno);
 		aluno.add(opcoesAluno);
 		barraTopo.add(equipamento);
+		equipamento.add(opcoesEquipamento);
 		barraTopo.add(instrutor);
 		instrutor.add(opcoesInstrutor);
 		barraTopo.add(sair);
@@ -84,6 +88,7 @@ public class Principal extends JFrame {
 		opcoesModalidade.addActionListener((event) -> {
 			alunoView.setVisible(false);
 			instrutorView.setVisible(false);
+			equipamentoView.setVisible(false);
 			telaSelecionada.add(modalidadeView);
 			modalidadeView.setVisible(true);
 		});
@@ -91,6 +96,7 @@ public class Principal extends JFrame {
 		opcoesAluno.addActionListener((event) -> {
 			modalidadeView.setVisible(false);
 			instrutorView.setVisible(false);
+			equipamentoView.setVisible(false);
 			telaSelecionada.add(alunoView);
 			alunoView.setVisible(true);
 		});
@@ -98,8 +104,17 @@ public class Principal extends JFrame {
 		opcoesInstrutor.addActionListener((event) -> {
 			modalidadeView.setVisible(false);
 			alunoView.setVisible(false);
+			equipamentoView.setVisible(false);
 			telaSelecionada.add(instrutorView);
 			instrutorView.setVisible(true);
+		});
+		
+		opcoesEquipamento.addActionListener((event) -> {
+			modalidadeView.setVisible(false);
+			alunoView.setVisible(false);
+			instrutorView.setVisible(false);
+			telaSelecionada.add(equipamentoView);
+			equipamentoView.setVisible(true);
 		});
 
 		exit.addActionListener((event) -> {
