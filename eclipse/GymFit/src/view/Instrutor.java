@@ -11,31 +11,29 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
 import javax.swing.table.DefaultTableModel;
 
-import model.ModalidadeListagem;
-import model.ModalidadeDAO;
+import model.InstrutorDAO;
+import model.InstrutorListagem;
 
-public class Modalidade extends JPanel {
-
+public class Instrutor extends JPanel {
 	private JLabel titulo;
 	private JLabel nome;
 	private JLabel valor;
 	private JTextField inputNome;
-	private JTextField inputValor;
+	private JTextField inputFormacao;
 	private JButton salvar;
 	private JButton editar;
 	private JButton excluir;
 	private JButton selecionarLinha;
 	
 	private JTable tabelaModalidades = new JTable();
-	ModalidadeListagem listaModalidades = new ModalidadeListagem();
+	InstrutorListagem listaInstrutores = new InstrutorListagem();
 
-	String colunas[] = { "Nome", "Valor" };
+	String colunas[] = { "Nome", "Formação" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
-	public Modalidade() {
+	public Instrutor() {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
@@ -51,7 +49,7 @@ public class Modalidade extends JPanel {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(5, 5, 5, 5);
 
-		titulo = new JLabel("Menu de Modalidades");
+		titulo = new JLabel("Menu de Instrutores");
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		add(titulo, gbc);
@@ -66,15 +64,15 @@ public class Modalidade extends JPanel {
 		gbc.gridy = 1;
 		add(inputNome, gbc);
 
-		valor = new JLabel("Valor ");
+		valor = new JLabel("Formação ");
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		add(valor, gbc);
 
-		inputValor = new JTextField(30);
+		inputFormacao = new JTextField(30);
 		gbc.gridx = 1;
 		gbc.gridy = 2;
-		add(inputValor, gbc);
+		add(inputFormacao, gbc);
 
 		salvar = new JButton("Salvar");
 		gbc.gridx = 1;
@@ -109,17 +107,17 @@ public class Modalidade extends JPanel {
 	private void organizarEventos() {
 		salvar.addActionListener((event) -> {
 			String nome = inputNome.getText();
-			double valor = Double.parseDouble(inputValor.getText());
+			String formacao = inputFormacao.getText();
 
-			ModalidadeDAO modalidade = new ModalidadeDAO(nome, valor);
-			listaModalidades.adicionar(modalidade);
+			InstrutorDAO instrutor = new InstrutorDAO(nome, formacao);
+			listaInstrutores.adicionar(instrutor);
 
 			inputNome.setText("");
-			inputValor.setText("");
+			inputFormacao.setText("");
 			modelo.setRowCount(0);
 
-			for (int i = 0; i < listaModalidades.getSize(); i++) {
-				Object[] lista = { listaModalidades.getOne(i).getNome(), listaModalidades.getOne(i).getValor() };
+			for (int i = 0; i < listaInstrutores.getSize(); i++) {
+				Object[] lista = { listaInstrutores.getOne(i).getNome(), listaInstrutores.getOne(i).getFormacao() };
 
 				modelo.addRow(lista);
 			}
@@ -129,10 +127,10 @@ public class Modalidade extends JPanel {
 			int linhaSelecionada = tabelaModalidades.getSelectedRow();
 			if (linhaSelecionada != -1) {
 				inputNome.setText(tabelaModalidades.getValueAt(linhaSelecionada, 0).toString());
-				inputValor.setText(tabelaModalidades.getValueAt(linhaSelecionada, 1).toString());
+				inputFormacao.setText(tabelaModalidades.getValueAt(linhaSelecionada, 1).toString());
 				editar.setVisible(true);
 			} else {
-				JOptionPane.showMessageDialog(null, "Selecione uma modalidade.");
+				JOptionPane.showMessageDialog(null, "Selecione um instrutor.");
 			}
 		});
 
@@ -140,26 +138,26 @@ public class Modalidade extends JPanel {
 			int linhaSelecionada = tabelaModalidades.getSelectedRow();
 
 			String nome = inputNome.getText();
-			double valor = Double.parseDouble(inputValor.getText());
-			ModalidadeDAO modalidadeEditada = new ModalidadeDAO(nome, valor);
+			String formacao = inputFormacao.getText();
+			InstrutorDAO instrutorEditado = new InstrutorDAO(nome, formacao);
 
 			inputNome.setText("");
-			inputValor.setText("");
+			inputFormacao.setText("");
 
-			listaModalidades.editRegister(linhaSelecionada, modalidadeEditada);
+			listaInstrutores.editRegister(linhaSelecionada, instrutorEditado);
 
 			tabelaModalidades.setValueAt(nome, linhaSelecionada, 0);
-			tabelaModalidades.setValueAt(valor, linhaSelecionada, 1);
+			tabelaModalidades.setValueAt(formacao, linhaSelecionada, 1);
 
 		});
 
 		excluir.addActionListener((event) -> {
 			int linhaSelecionada = tabelaModalidades.getSelectedRow();
 			if (linhaSelecionada != -1) {
-				listaModalidades.removeRegister(linhaSelecionada);
+				listaInstrutores.removeRegister(linhaSelecionada);
 				modelo.removeRow(linhaSelecionada);
 			} else {
-				JOptionPane.showMessageDialog(null, "Selecione uma modalidade para ser excluída.");
+				JOptionPane.showMessageDialog(null, "Selecione um instrutor para ser excluído.");
 			}
 		});
 

@@ -19,15 +19,16 @@ public class Principal extends JFrame {
 	private JMenuItem opcoesAluno;
 	private JMenu equipamento;
 	private JMenu instrutor;
+	private JMenuItem opcoesInstrutor;
 	private JMenu sair;
 	private JMenuItem exit;
 	private JPanel telaSelecionada;
-	private JButton voltar;
 	private JMenuBar barraRodape;
 	private JLabel status;
 	
 	Modalidade modalidadeView = new Modalidade();
 	Aluno alunoView = new Aluno();
+	Instrutor instrutorView = new Instrutor();
 
 	public Principal() {
 		super("Principal");
@@ -52,6 +53,7 @@ public class Principal extends JFrame {
 		opcoesAluno = new JMenuItem("Menu");
 		equipamento = new JMenu("Equipamento");
 		instrutor = new JMenu("Instrutor");
+		opcoesInstrutor = new JMenuItem("Menu");
 		sair = new JMenu("Sair");
 		exit = new JMenuItem("Exit");
 		telaSelecionada = new JPanel();
@@ -68,6 +70,7 @@ public class Principal extends JFrame {
 		aluno.add(opcoesAluno);
 		barraTopo.add(equipamento);
 		barraTopo.add(instrutor);
+		instrutor.add(opcoesInstrutor);
 		barraTopo.add(sair);
 		sair.add(exit);
 
@@ -80,14 +83,23 @@ public class Principal extends JFrame {
 	private void organizarEventos() {
 		opcoesModalidade.addActionListener((event) -> {
 			alunoView.setVisible(false);
+			instrutorView.setVisible(false);
 			telaSelecionada.add(modalidadeView);
 			modalidadeView.setVisible(true);
 		});
 
 		opcoesAluno.addActionListener((event) -> {
 			modalidadeView.setVisible(false);
+			instrutorView.setVisible(false);
 			telaSelecionada.add(alunoView);
 			alunoView.setVisible(true);
+		});
+		
+		opcoesInstrutor.addActionListener((event) -> {
+			modalidadeView.setVisible(false);
+			alunoView.setVisible(false);
+			telaSelecionada.add(instrutorView);
+			instrutorView.setVisible(true);
 		});
 
 		exit.addActionListener((event) -> {

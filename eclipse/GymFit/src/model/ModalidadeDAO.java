@@ -1,21 +1,11 @@
 package model;
 
-public class ModalidadeDAO {
-	private String nome;
+public class ModalidadeDAO extends EntidadeDAO {
 	private double valor;
 
 	public ModalidadeDAO(String nome, double valor) {
-		super();
-		setNome(nome);
+		super(nome);
 		setValor(valor);
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public double getValor() {

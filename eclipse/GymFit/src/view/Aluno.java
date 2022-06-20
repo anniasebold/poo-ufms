@@ -150,7 +150,7 @@ public class Aluno extends JPanel {
 				inputObjetivo.setText(tabelaAlunos.getValueAt(linhaSelecionada, 2).toString());
 				editar.setVisible(true);
 			} else {
-				JOptionPane.showMessageDialog(null, "Seleciona uma modalidade para ser selecionada.");
+				JOptionPane.showMessageDialog(null, "Selecione um aluno.");
 			}
 		});
 
@@ -180,7 +180,7 @@ public class Aluno extends JPanel {
 				listaAlunos.removeRegister(linhaSelecionada);
 				modelo.removeRow(linhaSelecionada);
 			} else {
-				JOptionPane.showMessageDialog(null, "Seleciona uma modalidade para ser excluída.");
+				JOptionPane.showMessageDialog(null, "Selecione um aluno para ser excluído.");
 			}
 		});
 		

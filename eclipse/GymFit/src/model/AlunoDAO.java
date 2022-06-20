@@ -1,23 +1,13 @@
 package model;
 
-public class AlunoDAO {
-	private String nome;
+public class AlunoDAO extends EntidadeDAO {
 	private int idade;
 	private String objetivo;
 
 	public AlunoDAO(String nome, int idade, String objetivo) {
-		super();
-		this.nome = nome;
-		this.idade = idade;
-		this.objetivo = objetivo;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+		super(nome);
+		setIdade(idade);
+		setObjetivo(objetivo);
 	}
 
 	public int getIdade() {
