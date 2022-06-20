@@ -80,7 +80,7 @@ public class Principal extends JFrame {
 		
 		exit.addActionListener(
 			(event) -> {
-				this.setVisible(false);
+				System.exit(0);
 		});
 	}
 	
