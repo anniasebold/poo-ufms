@@ -30,7 +30,7 @@ public class Equipamento extends JPanel {
 	private JButton excluir;
 	private JButton selecionarLinha;
 
-	private JTable tabelaInstrutores = new JTable();
+	private JTable tabelaEquipamentos = new JTable();
 	EquipamentoListagem listaEquipamentos = new EquipamentoListagem();
 
 	String colunas[] = { "Nome", "Músculo Trabalhado", "Estado" };
@@ -108,12 +108,12 @@ public class Equipamento extends JPanel {
 		gbc.gridy = 7;
 		add(excluir, gbc);
 
-		tabelaInstrutores.setModel(modelo);
-		tabelaInstrutores.setVisible(true);
+		tabelaEquipamentos.setModel(modelo);
+		tabelaEquipamentos.setVisible(true);
 
 		gbc.gridx = 1;
 		gbc.gridy = 9;
-		add(new JScrollPane(tabelaInstrutores), gbc);
+		add(new JScrollPane(tabelaEquipamentos), gbc);
 
 	}
 	
@@ -143,11 +143,11 @@ public class Equipamento extends JPanel {
 		});
 
 		selecionarLinha.addActionListener((event) -> {
-			int linhaSelecionada = tabelaInstrutores.getSelectedRow();
+			int linhaSelecionada = tabelaEquipamentos.getSelectedRow();
 			if (linhaSelecionada != -1) {
-				inputNome.setText(tabelaInstrutores.getValueAt(linhaSelecionada, 0).toString());
-				inputMusculoTrab.setText(tabelaInstrutores.getValueAt(linhaSelecionada, 1).toString());
-				inputEstado.setText(tabelaInstrutores.getValueAt(linhaSelecionada, 2).toString());
+				inputNome.setText(tabelaEquipamentos.getValueAt(linhaSelecionada, 0).toString());
+				inputMusculoTrab.setText(tabelaEquipamentos.getValueAt(linhaSelecionada, 1).toString());
+				inputEstado.setText(tabelaEquipamentos.getValueAt(linhaSelecionada, 2).toString());
 				editar.setVisible(true);
 			} else {
 				JOptionPane.showMessageDialog(null, "Selecione um equipamento.");
@@ -155,7 +155,7 @@ public class Equipamento extends JPanel {
 		});
 
 		editar.addActionListener((event) -> {
-			int linhaSelecionada = tabelaInstrutores.getSelectedRow();
+			int linhaSelecionada = tabelaEquipamentos.getSelectedRow();
 
 			String nome = inputNome.getText();
 			String musculoTrab = inputMusculoTrab.getText();
@@ -168,14 +168,14 @@ public class Equipamento extends JPanel {
 
 			listaEquipamentos.editRegister(linhaSelecionada, equipamentoEditado);
 
-			tabelaInstrutores.setValueAt(nome, linhaSelecionada, 0);
-			tabelaInstrutores.setValueAt(musculoTrab, linhaSelecionada, 1);
-			tabelaInstrutores.setValueAt(estado, linhaSelecionada, 2);
+			tabelaEquipamentos.setValueAt(nome, linhaSelecionada, 0);
+			tabelaEquipamentos.setValueAt(musculoTrab, linhaSelecionada, 1);
+			tabelaEquipamentos.setValueAt(estado, linhaSelecionada, 2);
 
 		});
 
 		excluir.addActionListener((event) -> {
-			int linhaSelecionada = tabelaInstrutores.getSelectedRow();
+			int linhaSelecionada = tabelaEquipamentos.getSelectedRow();
 			if (linhaSelecionada != -1) {
 				listaEquipamentos.removeRegister(linhaSelecionada);
 				modelo.removeRow(linhaSelecionada);
