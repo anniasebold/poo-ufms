@@ -1,6 +1,6 @@
 package model;
 
-public class EntidadeDAO {
+abstract public class EntidadeDAO {
 	private String nome;
 
 	public EntidadeDAO(String nome) {

@@ -8,6 +8,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import model.InstrutorListagem;
+import model.ModalidadeListagem;
+
 import java.awt.BorderLayout;
 
 public class Principal extends JFrame {
@@ -27,9 +30,12 @@ public class Principal extends JFrame {
 	private JMenuBar barraRodape;
 	private JLabel status;
 	
-	Modalidade modalidadeView = new Modalidade();
+	ModalidadeListagem listaModalidades = new ModalidadeListagem();
+	InstrutorListagem listaInstrutores = new InstrutorListagem();
+	
+	Modalidade modalidadeView = new Modalidade(listaModalidades, listaInstrutores);
 	Aluno alunoView = new Aluno();
-	Instrutor instrutorView = new Instrutor();
+	Instrutor instrutorView = new Instrutor(listaInstrutores);
 	Equipamento equipamentoView = new Equipamento();
 
 	public Principal() {
@@ -42,7 +48,7 @@ public class Principal extends JFrame {
 
 	private void prepararJanela() {
 		setTitle("GymFit");
-		setSize(750, 750);
+		setSize(750, 850);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

@@ -28,15 +28,16 @@ public class Instrutor extends JPanel {
 	private JButton selecionarLinha;
 	
 	private JTable tabelaInstrutores = new JTable();
-	InstrutorListagem listaInstrutores = new InstrutorListagem();
+	InstrutorListagem listaInstrutores;
 
 	String colunas[] = { "Nome", "Formação" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
-	public Instrutor() {
+	public Instrutor(InstrutorListagem listaInstrutores) {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
+		this.listaInstrutores = listaInstrutores;
 //		finalizar();
 	}
 
