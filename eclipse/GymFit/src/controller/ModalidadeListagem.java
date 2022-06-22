@@ -1,19 +1,21 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 
+import model.Modalidade;
+
 public class ModalidadeListagem {
-	private ArrayList<ModalidadeDAO> listaModalidades;
+	private ArrayList<Modalidade> listaModalidades;
 
 	public ModalidadeListagem() {
-		listaModalidades = new ArrayList<ModalidadeDAO>();
+		listaModalidades = new ArrayList<Modalidade>();
 	}
 
-	public void adicionar(ModalidadeDAO modalidade) {
+	public void adicionar(Modalidade modalidade) {
 		listaModalidades.add(modalidade);
 	}
 
-	public ModalidadeDAO getOne(int posicao) {
+	public Modalidade getOne(int posicao) {
 		return listaModalidades.get(posicao);
 	}
 
@@ -25,7 +27,7 @@ public class ModalidadeListagem {
 		listaModalidades.remove(posicao);
 	}
 
-	public void editRegister(int posicao, ModalidadeDAO m) {
+	public void editRegister(int posicao, Modalidade m) {
 		listaModalidades.set(posicao, m);
 	}
 

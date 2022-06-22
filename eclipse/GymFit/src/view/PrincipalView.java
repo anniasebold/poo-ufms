@@ -8,12 +8,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import model.InstrutorListagem;
-import model.ModalidadeListagem;
+import controller.InstrutorListagem;
+import controller.ModalidadeListagem;
 
 import java.awt.BorderLayout;
 
-public class Principal extends JFrame {
+public class PrincipalView extends JFrame {
 
 	private JMenuBar barraTopo;
 	private JMenu modalidade;
@@ -33,12 +33,12 @@ public class Principal extends JFrame {
 	ModalidadeListagem listaModalidades = new ModalidadeListagem();
 	InstrutorListagem listaInstrutores = new InstrutorListagem();
 	
-	Modalidade modalidadeView = new Modalidade(listaModalidades, listaInstrutores);
-	Aluno alunoView = new Aluno();
-	Instrutor instrutorView = new Instrutor(listaInstrutores);
-	Equipamento equipamentoView = new Equipamento();
+	ModalidadeView modalidadeView = new ModalidadeView(listaModalidades, listaInstrutores);
+	AlunoView alunoView = new AlunoView();
+	InstrutorView instrutorView = new InstrutorView(listaInstrutores);
+	EquipamentoView equipamentoView = new EquipamentoView();
 
-	public Principal() {
+	public PrincipalView() {
 		super("Principal");
 		prepararJanela();
 		organizarComponentes();

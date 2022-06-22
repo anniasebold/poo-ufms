@@ -1,11 +1,11 @@
 package model;
 
-public class EquipamentoDAO extends EntidadeDAO {
+public class Equipamento extends Entidade {
 	
 	private String musculoTrab;
 	private String estado;
 	
-	public EquipamentoDAO(String nome, String musculoTrab, String estado) {
+	public Equipamento(String nome, String musculoTrab, String estado) {
 		super(nome);
 		setMusculoTrab(musculoTrab);
 		setEstado(estado);

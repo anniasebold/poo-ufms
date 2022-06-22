@@ -1,10 +1,10 @@
 package model;
 
-public class InstrutorDAO extends EntidadeDAO {
+public class Instrutor extends Entidade {
 	
 	private String formacao;
 
-	public InstrutorDAO(String nome, String formacao) {
+	public Instrutor(String nome, String formacao) {
 		super(nome);
 		setFormacao(formacao);
 	}

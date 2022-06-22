@@ -13,10 +13,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import model.AlunoDAO;
-import model.AlunoListagem;
+import controller.AlunoListagem;
+import model.Aluno;
 
-public class Aluno extends JPanel {
+public class AlunoView extends JPanel {
 
 	private JLabel titulo;
 	private JLabel nome;
@@ -36,7 +36,7 @@ public class Aluno extends JPanel {
 	String colunas[] = { "Nome", "Idade", "Objetivo" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
-	public Aluno() {
+	public AlunoView() {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
@@ -123,7 +123,7 @@ public class Aluno extends JPanel {
 			int idade = Integer.parseInt(inputIdade.getText());
 			String objetivo = inputObjetivo.getText();
 
-			AlunoDAO aluno = new AlunoDAO(nome, idade, objetivo);
+			Aluno aluno = new Aluno(nome, idade, objetivo);
 			listaAlunos.adicionar(aluno);
 
 			inputNome.setText("");
@@ -160,7 +160,7 @@ public class Aluno extends JPanel {
 			String nome = inputNome.getText();
 			int idade = Integer.parseInt(inputIdade.getText());
 			String objetivo = inputObjetivo.getText();
-			AlunoDAO alunoEditado = new AlunoDAO(nome, idade, objetivo);
+			Aluno alunoEditado = new Aluno(nome, idade, objetivo);
 
 			inputNome.setText("");
 			inputIdade.setText("");

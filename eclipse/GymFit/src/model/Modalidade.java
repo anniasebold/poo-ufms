@@ -1,10 +1,10 @@
 package model;
 
-public class ModalidadeDAO extends EntidadeDAO {
+public class Modalidade extends Entidade {
 	private double valor;
-	private InstrutorDAO instrutor;
+	private Instrutor instrutor;
 	
-	public ModalidadeDAO(String nome, double valor, InstrutorDAO instrutor) {
+	public Modalidade(String nome, double valor, Instrutor instrutor) {
 		super(nome);
 		setValor(valor);
 		setInstrutor(instrutor);
@@ -18,11 +18,11 @@ public class ModalidadeDAO extends EntidadeDAO {
 		this.valor = valor;
 	}
 	
-	public InstrutorDAO getInstrutor() {
+	public Instrutor getInstrutor() {
 		return instrutor;
 	}
 
-	public void setInstrutor(InstrutorDAO instrutor) {
+	public void setInstrutor(Instrutor instrutor) {
 		this.instrutor = instrutor;
 	}
 

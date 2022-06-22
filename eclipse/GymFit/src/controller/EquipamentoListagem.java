@@ -1,19 +1,21 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 
+import model.Equipamento;
+
 public class EquipamentoListagem {
-	private ArrayList<EquipamentoDAO> listaEquipamentos;
+	private ArrayList<Equipamento> listaEquipamentos;
 
 	public EquipamentoListagem() {
-		listaEquipamentos = new ArrayList<EquipamentoDAO>();
+		listaEquipamentos = new ArrayList<Equipamento>();
 	}
 
-	public void adicionar(EquipamentoDAO instrutor) {
+	public void adicionar(Equipamento instrutor) {
 		listaEquipamentos.add(instrutor);
 	}
 
-	public EquipamentoDAO getOne(int posicao) {
+	public Equipamento getOne(int posicao) {
 		return listaEquipamentos.get(posicao);
 	}
 
@@ -25,7 +27,7 @@ public class EquipamentoListagem {
 		listaEquipamentos.remove(posicao);
 	}
 
-	public void editRegister(int posicao, EquipamentoDAO e) {
+	public void editRegister(int posicao, Equipamento e) {
 		listaEquipamentos.set(posicao, e);
 	}
 

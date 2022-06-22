@@ -1,19 +1,21 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 
+import model.Aluno;
+
 public class AlunoListagem {
-	private ArrayList<AlunoDAO> listaAlunos;
+	private ArrayList<Aluno> listaAlunos;
 
 	public AlunoListagem() {
-		listaAlunos = new ArrayList<AlunoDAO>();
+		listaAlunos = new ArrayList<Aluno>();
 	}
 
-	public void adicionar(AlunoDAO aluno) {
+	public void adicionar(Aluno aluno) {
 		listaAlunos.add(aluno);
 	}
 
-	public AlunoDAO getOne(int posicao) {
+	public Aluno getOne(int posicao) {
 		return listaAlunos.get(posicao);
 	}
 
@@ -25,7 +27,7 @@ public class AlunoListagem {
 		listaAlunos.remove(posicao);
 	}
 
-	public void editRegister(int posicao, AlunoDAO a) {
+	public void editRegister(int posicao, Aluno a) {
 		listaAlunos.set(posicao, a);
 	}
 }

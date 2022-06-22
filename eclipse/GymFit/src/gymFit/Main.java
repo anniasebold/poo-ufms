@@ -1,9 +1,9 @@
 package gymFit;
 
-import view.Principal;
+import view.PrincipalView;
 
 public class Main {
 	public static void main(String[] args) {
-		Principal principal = new Principal();
+		PrincipalView principal = new PrincipalView();
 	}
 }

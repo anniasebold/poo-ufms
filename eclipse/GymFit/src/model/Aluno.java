@@ -1,10 +1,10 @@
 package model;
 
-public class AlunoDAO extends EntidadeDAO {
+public class Aluno extends Entidade {
 	private int idade;
 	private String objetivo;
 
-	public AlunoDAO(String nome, int idade, String objetivo) {
+	public Aluno(String nome, int idade, String objetivo) {
 		super(nome);
 		setIdade(idade);
 		setObjetivo(objetivo);

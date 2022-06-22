@@ -1,9 +1,9 @@
 package model;
 
-abstract public class EntidadeDAO {
+abstract public class Entidade {
 	private String nome;
 
-	public EntidadeDAO(String nome) {
+	public Entidade(String nome) {
 		super();
 		setNome(nome);
 	}

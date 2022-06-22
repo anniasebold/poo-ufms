@@ -14,12 +14,12 @@ import javax.swing.JTextField;
 
 import javax.swing.table.DefaultTableModel;
 
-import model.ModalidadeListagem;
-import model.InstrutorDAO;
-import model.InstrutorListagem;
-import model.ModalidadeDAO;
+import controller.InstrutorListagem;
+import controller.ModalidadeListagem;
+import model.Instrutor;
+import model.Modalidade;
 
-public class Modalidade extends JPanel {
+public class ModalidadeView extends JPanel {
 
 	private JLabel titulo;
 	private JLabel nome;
@@ -40,7 +40,7 @@ public class Modalidade extends JPanel {
 	String colunas[] = { "Nome", "Valor", "Nome Instrutor" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
-	public Modalidade(ModalidadeListagem listaModalidades, InstrutorListagem listaInstrutores) {
+	public ModalidadeView(ModalidadeListagem listaModalidades, InstrutorListagem listaInstrutores) {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
@@ -143,8 +143,8 @@ public class Modalidade extends JPanel {
 			for (int y = 0; y < listaInstrutores.getSize(); y++) {
 				System.out.println(listaInstrutores.getOne(y).getNome());
 				if (nomeInstrutor.equals(listaInstrutores.getOne(y).getNome())) {
-					InstrutorDAO instrutor = listaInstrutores.getOne(y);
-					ModalidadeDAO modalidade = new ModalidadeDAO(nome, valor, instrutor);
+					Instrutor instrutor = listaInstrutores.getOne(y);
+					Modalidade modalidade = new Modalidade(nome, valor, instrutor);
 					listaModalidades.adicionar(modalidade);
 				} else {
 					JOptionPane.showMessageDialog(null, "Digite um nome de instrutor válido.");
@@ -193,8 +193,8 @@ public class Modalidade extends JPanel {
 			for (int y = 0; y < listaInstrutores.getSize(); y++) {
 				System.out.println(listaInstrutores.getOne(y).getNome());
 				if (nomeInstrutor.equals(listaInstrutores.getOne(y).getNome())) {
-					InstrutorDAO instrutor = listaInstrutores.getOne(y);
-					ModalidadeDAO modalidadeEditada = new ModalidadeDAO(nome, valor, instrutor);
+					Instrutor instrutor = listaInstrutores.getOne(y);
+					Modalidade modalidadeEditada = new Modalidade(nome, valor, instrutor);
 
 					listaModalidades.editRegister(linhaSelecionada, modalidadeEditada);
 				} else {

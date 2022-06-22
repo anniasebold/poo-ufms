@@ -1,19 +1,21 @@
-package model;
+package controller;
 
 import java.util.ArrayList;
 
+import model.Instrutor;
+
 public class InstrutorListagem {
-	private ArrayList<InstrutorDAO> listaInstrutores;
+	private ArrayList<Instrutor> listaInstrutores;
 
 	public InstrutorListagem() {
-		listaInstrutores = new ArrayList<InstrutorDAO>();
+		listaInstrutores = new ArrayList<Instrutor>();
 	}
 
-	public void adicionar(InstrutorDAO instrutor) {
+	public void adicionar(Instrutor instrutor) {
 		listaInstrutores.add(instrutor);
 	}
 
-	public InstrutorDAO getOne(int posicao) {
+	public Instrutor getOne(int posicao) {
 		return listaInstrutores.get(posicao);
 	}
 
@@ -25,7 +27,7 @@ public class InstrutorListagem {
 		listaInstrutores.remove(posicao);
 	}
 
-	public void editRegister(int posicao, InstrutorDAO i) {
+	public void editRegister(int posicao, Instrutor i) {
 		listaInstrutores.set(posicao, i);
 	}
 

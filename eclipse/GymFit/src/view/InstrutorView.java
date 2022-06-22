@@ -13,10 +13,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import model.InstrutorDAO;
-import model.InstrutorListagem;
+import controller.InstrutorListagem;
+import model.Instrutor;
 
-public class Instrutor extends JPanel {
+public class InstrutorView extends JPanel {
 	private JLabel titulo;
 	private JLabel nome;
 	private JLabel valor;
@@ -33,7 +33,7 @@ public class Instrutor extends JPanel {
 	String colunas[] = { "Nome", "Formação" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
-	public Instrutor(InstrutorListagem listaInstrutores) {
+	public InstrutorView(InstrutorListagem listaInstrutores) {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
@@ -110,7 +110,7 @@ public class Instrutor extends JPanel {
 			String nome = inputNome.getText();
 			String formacao = inputFormacao.getText();
 
-			InstrutorDAO instrutor = new InstrutorDAO(nome, formacao);
+			Instrutor instrutor = new Instrutor(nome, formacao);
 			listaInstrutores.adicionar(instrutor);
 
 			inputNome.setText("");
@@ -140,7 +140,7 @@ public class Instrutor extends JPanel {
 
 			String nome = inputNome.getText();
 			String formacao = inputFormacao.getText();
-			InstrutorDAO instrutorEditado = new InstrutorDAO(nome, formacao);
+			Instrutor instrutorEditado = new Instrutor(nome, formacao);
 
 			inputNome.setText("");
 			inputFormacao.setText("");

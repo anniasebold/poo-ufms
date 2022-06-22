@@ -13,10 +13,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import model.EquipamentoDAO;
-import model.EquipamentoListagem;
+import controller.EquipamentoListagem;
+import model.Equipamento;
 
-public class Equipamento extends JPanel {
+public class EquipamentoView extends JPanel {
 
 	private JLabel titulo;
 	private JLabel nome;
@@ -36,7 +36,7 @@ public class Equipamento extends JPanel {
 	String colunas[] = { "Nome", "Músculo Trabalhado", "Estado" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
-	public Equipamento() {
+	public EquipamentoView() {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
@@ -123,7 +123,7 @@ public class Equipamento extends JPanel {
 			String musculoTrab = inputMusculoTrab.getText();
 			String estado = inputEstado.getText();
 
-			EquipamentoDAO equipamento = new EquipamentoDAO(nome, musculoTrab, estado);
+			Equipamento equipamento = new Equipamento(nome, musculoTrab, estado);
 			listaEquipamentos.adicionar(equipamento);
 
 			inputNome.setText("");
@@ -160,7 +160,7 @@ public class Equipamento extends JPanel {
 			String nome = inputNome.getText();
 			String musculoTrab = inputMusculoTrab.getText();
 			String estado = inputEstado.getText();
-			EquipamentoDAO equipamentoEditado = new EquipamentoDAO(nome, musculoTrab, estado);
+			Equipamento equipamentoEditado = new Equipamento(nome, musculoTrab, estado);
 
 			inputNome.setText("");
 			inputMusculoTrab.setText("");
