@@ -7,4 +7,4 @@ CREATE TABLE modalidades (
 SELECT nome FROM modalidades
 ORDER BY nome;
 
-INSERT INTO modalidades VALUES ("Musculação","200.00");
+INSERT INTO modalidades VALUES (1,"Musculação","200.00");

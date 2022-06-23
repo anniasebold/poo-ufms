@@ -1,10 +1,16 @@
 package model;
 
 abstract public class Entidade {
+	private int id;
 	private String nome;
+	
+	public Entidade() {
+		
+	}
 
-	public Entidade(String nome) {
+	public Entidade(int id, String nome) {
 		super();
+		setId(id);
 		setNome(nome);
 	}
 
@@ -15,5 +21,14 @@ abstract public class Entidade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 }

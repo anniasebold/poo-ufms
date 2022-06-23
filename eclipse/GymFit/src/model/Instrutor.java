@@ -3,9 +3,13 @@ package model;
 public class Instrutor extends Entidade {
 	
 	private String formacao;
+	
+	public Instrutor() {
+		super();
+	}
 
-	public Instrutor(String nome, String formacao) {
-		super(nome);
+	public Instrutor(int id, String nome, String formacao) {
+		super(id, nome);
 		setFormacao(formacao);
 	}
 

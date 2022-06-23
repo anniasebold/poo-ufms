@@ -13,6 +13,8 @@ import controller.ModalidadeListagem;
 
 import java.awt.BorderLayout;
 
+import connection.Conexao;
+
 public class PrincipalView extends JFrame {
 
 	private JMenuBar barraTopo;
@@ -51,6 +53,7 @@ public class PrincipalView extends JFrame {
 		setSize(750, 850);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(this);
 	}
 
 	private void organizarComponentes() {

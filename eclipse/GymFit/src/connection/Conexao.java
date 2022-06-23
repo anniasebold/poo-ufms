@@ -47,10 +47,10 @@ public class Conexao {
         }
 	}
 	
-    public PreparedStatement criarPreparedStatement(String pSQL, int RETURN_GENERATED_KEYS) {
+    public PreparedStatement criarPreparedStatement(String sql, int id_gerado) {
         try {
             System.out.println("Executando SQL.");
-            return conexao.prepareStatement(pSQL, RETURN_GENERATED_KEYS);
+            return conexao.prepareStatement(sql, id_gerado);
         } catch (SQLException e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
