@@ -41,7 +41,7 @@ public class ModalidadeDAO extends Conexao {
 		conectar();
 		
 		ArrayList<Modalidade> listaModalidades = new ArrayList<>();
-		String sql = "SELECT m.id, m.nome, m.valor, i.nome \n" + 
+		String sql = "SELECT m.id, m.nome, m.valor, i.id, i.nome \n" + 
 				"FROM modalidades m \n" + 
 				"INNER JOIN instrutores i ON i.id = m.instrutor_id";		
 		PreparedStatement preparedStatement = criarPreparedStatement(sql);
@@ -54,9 +54,16 @@ public class ModalidadeDAO extends Conexao {
 				modalidade.setId(resultSet.getInt(1));
 				modalidade.setNome(resultSet.getString(2));
 				modalidade.setValor(resultSet.getDouble(3));
-				modalidade.setNomeInstrutor(resultSet.getString(4));
+				modalidade.setIdinstrutor(resultSet.getInt(4));
+				modalidade.setNomeInstrutor(resultSet.getString(5));
 				listaModalidades.add(modalidade);	
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -77,14 +77,14 @@ public class InstrutorDAO extends Conexao {
 		try {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
-			if (resultSet.next()) {
-				while (resultSet.next()) {
-					instrutor.setId(resultSet.getInt("id"));
-					instrutor.setNome(resultSet.getString("nome"));
-					instrutor.setFormacao(resultSet.getString("formacao"));
-				}
-			} else {
-				instrutor = null;
+			while (resultSet.next()) {
+				instrutor.setId(resultSet.getInt("id"));
+				instrutor.setNome(resultSet.getString("nome"));
+				instrutor.setFormacao(resultSet.getString("formacao"));
+				
+				desconectar();
+				
+				return instrutor;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -99,7 +99,7 @@ public class InstrutorDAO extends Conexao {
 
 		desconectar();
 
-		return instrutor;
+		return null;
 	}
 
 	public boolean removerInstrutor(int id) {

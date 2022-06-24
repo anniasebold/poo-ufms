@@ -25,7 +25,7 @@ public class EquipamentoDAO extends Conexao {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		try {
 			preparedStatement.close();
 		} catch (SQLException e) {
@@ -45,10 +45,10 @@ public class EquipamentoDAO extends Conexao {
 		String sql = "SELECT * FROM equipamentos";
 
 		PreparedStatement preparedStatement = criarPreparedStatement(sql);
-		
+
 		try {
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
 				Equipamento equipamento = new Equipamento(resultSet.getInt("id"), resultSet.getString("nome"),
 						resultSet.getString("musc_trabalhado"), resultSet.getString("estado"));
@@ -57,32 +57,31 @@ public class EquipamentoDAO extends Conexao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		desconectar();
-		
+
 		return listaEquipamentos;
-		
+
 	}
-	
+
 	public Equipamento getEquipamento(int id) {
 		conectar();
-		
+
 		Equipamento equipamento = new Equipamento();
-		String sql = "SELECT * FROM equipamentos where id = '"+id+"'";
-		
+		String sql = "SELECT * FROM equipamentos where id = '" + id + "'";
+
 		PreparedStatement preparedStatement = criarPreparedStatement(sql);
-		
+
 		try {
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			while(resultSet.next()) {
+
+			while (resultSet.next()) {
 				equipamento.setId(resultSet.getInt("id"));
 				equipamento.setNome(resultSet.getString("nome"));
 				equipamento.setMusculoTrab(resultSet.getString("musc_trabalhado"));
@@ -91,61 +90,62 @@ public class EquipamentoDAO extends Conexao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		desconectar();
-		
+
 		return equipamento;
 	}
-	
+
 	public boolean editarEquipamento(Equipamento equipamento) {
 		conectar();
-		
-		String sql = "UPDATE equipamentos SET nome = '"+equipamento.getNome()+"', musc_trabalhado = '"+equipamento.getMusculoTrab()+"' WHERE id = '"+equipamento.getId()+"'";
+
+		String sql = "UPDATE equipamentos SET nome = '" + equipamento.getNome() + "', musc_trabalhado = '"
+				+ equipamento.getMusculoTrab() + "', estado = '"+equipamento.getEstado()+"' WHERE id = '" + equipamento.getId() + "'";
 		PreparedStatement preparedStatement = criarPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		
+
 		try {
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		desconectar();
-		
+
 		return true;
 	}
-	
+
 	public boolean removerEquipamento(int id) {
 		conectar();
-		
-		String sql = "DELETE FROM equipamentos WHERE id = '"+id+"'";
+
+		String sql = "DELETE FROM equipamentos WHERE id = '" + id + "'";
 		PreparedStatement preparedStatement = criarPreparedStatement(sql);
-		
+
 		try {
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		try {
 			preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		desconectar();
-		
+
 		return true;
 	}
 
