@@ -72,4 +72,28 @@ public class ModalidadeDAO extends Conexao {
 		
 		return listaModalidades;
 	}
+	
+	public boolean removerModalidade(int id) {
+		conectar();
+		
+		String sql = "DELETE FROM modalidades WHERE id = '" + id + "'";
+		PreparedStatement preparedStatement = criarPreparedStatement(sql);
+		
+		try {
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		desconectar();
+		
+		return true;
+	}
 }

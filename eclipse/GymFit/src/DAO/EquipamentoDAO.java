@@ -106,7 +106,8 @@ public class EquipamentoDAO extends Conexao {
 		conectar();
 
 		String sql = "UPDATE equipamentos SET nome = '" + equipamento.getNome() + "', musc_trabalhado = '"
-				+ equipamento.getMusculoTrab() + "', estado = '"+equipamento.getEstado()+"' WHERE id = '" + equipamento.getId() + "'";
+				+ equipamento.getMusculoTrab() + "', estado = '" + equipamento.getEstado() + "' WHERE id = '"
+				+ equipamento.getId() + "'";
 		PreparedStatement preparedStatement = criarPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 		try {

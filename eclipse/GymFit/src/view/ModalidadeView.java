@@ -177,11 +177,25 @@ public class ModalidadeView extends JPanel {
 		});
 		
 		editar.addActionListener((event) -> {
-
+			
 		});
 
-		excluir.addActionListener((event) -> {
-
+		excluir.addActionListener((event) -> {	
+			int linhaSelecionada = tabelaModalidades.getSelectedRow();
+			
+			if (linhaSelecionada != -1) {
+				int idModalidade = (int) tabelaModalidades.getValueAt(linhaSelecionada, 0);
+				
+				if(modalidadeDAO.removerModalidade(idModalidade)) {
+					carregarListaModalidades();
+					JOptionPane.showMessageDialog(this, "Modalidade excluída com sucesso.");
+				} else {
+					JOptionPane.showMessageDialog(this, "Erro ao excluir modalidade.", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "Selecione uma modalidade para ser excluída.", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
 		});
 	}
 	
