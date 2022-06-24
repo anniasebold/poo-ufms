@@ -4,8 +4,8 @@ public class Aluno extends Entidade {
 	private int idade;
 	private String objetivo;
 
-	public Aluno(String nome, int idade, String objetivo) {
-		super(nome);
+	public Aluno(int id, String nome, int idade, String objetivo) {
+		super(id, nome);
 		setIdade(idade);
 		setObjetivo(objetivo);
 	}

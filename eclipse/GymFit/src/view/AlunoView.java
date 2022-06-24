@@ -123,8 +123,8 @@ public class AlunoView extends JPanel {
 			int idade = Integer.parseInt(inputIdade.getText());
 			String objetivo = inputObjetivo.getText();
 
-			Aluno aluno = new Aluno(nome, idade, objetivo);
-			listaAlunos.adicionar(aluno);
+//			Aluno aluno = new Aluno(nome, idade, objetivo);
+//			listaAlunos.adicionar(aluno);
 
 			inputNome.setText("");
 			inputIdade.setText("");
@@ -160,13 +160,13 @@ public class AlunoView extends JPanel {
 			String nome = inputNome.getText();
 			int idade = Integer.parseInt(inputIdade.getText());
 			String objetivo = inputObjetivo.getText();
-			Aluno alunoEditado = new Aluno(nome, idade, objetivo);
+//			Aluno alunoEditado = new Aluno(nome, idade, objetivo);
 
 			inputNome.setText("");
 			inputIdade.setText("");
 			inputObjetivo.setText("");
 
-			listaAlunos.editRegister(linhaSelecionada, alunoEditado);
+//			listaAlunos.editRegister(linhaSelecionada, alunoEditado);
 
 			tabelaAlunos.setValueAt(nome, linhaSelecionada, 0);
 			tabelaAlunos.setValueAt(idade, linhaSelecionada, 1);

@@ -26,19 +26,25 @@ public class InstrutorDAO extends Conexao {
 			return false;
 		}
 
+		try {
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		desconectar();
 		return true;
 	}
-	
+
 	public ArrayList<Instrutor> listarInstrutores() {
 		ArrayList<Instrutor> listaInstrutores = new ArrayList<>();
 
 		conectar();
 
 		String sql = "SELECT * FROM instrutores;";
+		PreparedStatement preparedStatement = criarPreparedStatement(sql);
 
 		try {
-			PreparedStatement preparedStatement = criarPreparedStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -50,69 +56,98 @@ public class InstrutorDAO extends Conexao {
 			e.printStackTrace();
 		}
 
+		try {
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		desconectar();
-		
+
 		return listaInstrutores;
 	}
-	
+
 	public Instrutor getInstrutor(int id) {
 		conectar();
-		
+
 		Instrutor instrutor = new Instrutor();
-		String sql = "SELECT * FROM instrutores WHERE id = '"+id+"'";
-		
+		String sql = "SELECT * FROM instrutores WHERE id = '" + id + "'";
+		PreparedStatement preparedStatement = criarPreparedStatement(sql);
+
 		try {
-			PreparedStatement preparedStatement = criarPreparedStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
-			while (resultSet.next()) {
-				instrutor.setId(resultSet.getInt("id"));
-				instrutor.setNome(resultSet.getString("nome"));
-				instrutor.setFormacao(resultSet.getString("formacao"));
+
+			if (resultSet.next()) {
+				while (resultSet.next()) {
+					instrutor.setId(resultSet.getInt("id"));
+					instrutor.setNome(resultSet.getString("nome"));
+					instrutor.setFormacao(resultSet.getString("formacao"));
+				}
+			} else {
+				instrutor = null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
+		try {
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		desconectar();
-		
+
 		return instrutor;
 	}
-	
+
 	public boolean removerInstrutor(int id) {
 		conectar();
-		
-		String sql = "DELETE FROM instrutores WHERE id = '"+id+"'";
+
+		String sql = "DELETE FROM instrutores WHERE id = '" + id + "'";
 		PreparedStatement preparedStatement = criarPreparedStatement(sql);
-		
+
 		try {
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
+		try {
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		desconectar();
-		
+
 		return true;
 	}
-	
+
 	public boolean editarInstrutor(Instrutor instrutor) {
 		conectar();
-		
-		String sql = "UPDATE instrutores SET nome = '"+instrutor.getNome()+"', formacao = '"+instrutor.getFormacao()+"' WHERE id = '"+instrutor.getId()+"'";
+
+		String sql = "UPDATE instrutores SET nome = '" + instrutor.getNome() + "', formacao = '"
+				+ instrutor.getFormacao() + "' WHERE id = '" + instrutor.getId() + "'";
 		PreparedStatement preparedStatement = criarPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		
+
 		try {
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
+		try {
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		desconectar();
-		
+
 		return true;
 	}
 }

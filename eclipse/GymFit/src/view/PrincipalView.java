@@ -32,12 +32,9 @@ public class PrincipalView extends JFrame {
 	private JMenuBar barraRodape;
 	private JLabel status;
 	
-	ModalidadeListagem listaModalidades = new ModalidadeListagem();
-	InstrutorListagem listaInstrutores = new InstrutorListagem();
-	
-	ModalidadeView modalidadeView = new ModalidadeView(listaModalidades, listaInstrutores);
+	ModalidadeView modalidadeView = new ModalidadeView();
 	AlunoView alunoView = new AlunoView();
-	InstrutorView instrutorView = new InstrutorView(listaInstrutores);
+	InstrutorView instrutorView = new InstrutorView();
 	EquipamentoView equipamentoView = new EquipamentoView();
 
 	public PrincipalView() {

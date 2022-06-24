@@ -3,6 +3,8 @@ package view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.Objects;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +16,8 @@ import javax.swing.JTextField;
 
 import javax.swing.table.DefaultTableModel;
 
+import DAO.InstrutorDAO;
+import DAO.ModalidadeDAO;
 import controller.InstrutorListagem;
 import controller.ModalidadeListagem;
 import model.Instrutor;
@@ -24,29 +28,30 @@ public class ModalidadeView extends JPanel {
 	private JLabel titulo;
 	private JLabel nome;
 	private JLabel valor;
-	private JLabel nomeInstrutor;
+	private JLabel IdInstrutor;
+	private JLabel ID;
 	private JTextField inputNome;
 	private JTextField inputValor;
-	private JTextField inputInstrutor;
+	private JTextField inputIdInstrutor;
+	private JTextField inputID;
 	private JButton salvar;
 	private JButton editar;
 	private JButton excluir;
 	private JButton selecionarLinha;
 
 	private JTable tabelaModalidades = new JTable();
-	ModalidadeListagem listaModalidades;
-	InstrutorListagem listaInstrutores;
-
-	String colunas[] = { "Nome", "Valor", "Nome Instrutor" };
+	
+	String colunas[] = { "ID", "Nome", "Valor", "Nome Instrutor" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
+	
+	ArrayList<Modalidade> listaModalidades = new ArrayList<>();
+	private InstrutorDAO instrutorDAO = new InstrutorDAO();
+	private ModalidadeDAO modalidadeDAO = new ModalidadeDAO();
 
-	public ModalidadeView(ModalidadeListagem listaModalidades, InstrutorListagem listaInstrutores) {
+	public ModalidadeView() {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
-		this.listaModalidades = listaModalidades;
-		this.listaInstrutores = listaInstrutores;
-//		finalizar();
 	}
 
 	public void prepararJanela() {
@@ -62,173 +67,138 @@ public class ModalidadeView extends JPanel {
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		add(titulo, gbc);
+		
+		ID = new JLabel("ID ");
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		add(ID, gbc);
+		
+		inputID = new JTextField(30);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		add(inputID, gbc);
+		inputID.setEditable(false);
+
 
 		nome = new JLabel("Nome ");
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		add(nome, gbc);
 
 		inputNome = new JTextField(30);
 		gbc.gridx = 1;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		add(inputNome, gbc);
 
 		valor = new JLabel("Valor ");
 		gbc.gridx = 0;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		add(valor, gbc);
 
 		inputValor = new JTextField(30);
 		gbc.gridx = 1;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		add(inputValor, gbc);
 
-		nomeInstrutor = new JLabel("Nome Instrutor ");
+		IdInstrutor = new JLabel("ID Instrutor ");
 		gbc.gridx = 0;
-		gbc.gridy = 3;
-		add(nomeInstrutor, gbc);
+		gbc.gridy = 4;
+		add(IdInstrutor, gbc);
 
-		inputInstrutor = new JTextField(30);
+		inputIdInstrutor = new JTextField(30);
 		gbc.gridx = 1;
-		gbc.gridy = 3;
-		add(inputInstrutor, gbc);
+		gbc.gridy = 4;
+		add(inputIdInstrutor, gbc);
 
 		salvar = new JButton("Salvar");
 		gbc.gridx = 1;
-		gbc.gridy = 4;
-		add(salvar, gbc);
-
-		selecionarLinha = new JButton("Selecionar Registro");
-		gbc.gridx = 1;
 		gbc.gridy = 5;
-		add(selecionarLinha, gbc);
-
-		excluir = new JButton("Excluir");
-		gbc.gridx = 1;
-		gbc.gridy = 6;
-		add(excluir, gbc);
+		add(salvar, gbc);
 
 		tabelaModalidades.setModel(modelo);
 		tabelaModalidades.setVisible(true);
 
 		gbc.gridx = 1;
-		gbc.gridy = 7;
+		gbc.gridy = 6;
 		add(new JScrollPane(tabelaModalidades), gbc);
 		
 		editar = new JButton("Editar");
 		gbc.gridx = 1;
-		gbc.gridy = 8;
+		gbc.gridy = 7;
 		add(editar, gbc);
-		editar.setVisible(false);
+		
+		excluir = new JButton("Excluir");
+		gbc.gridx = 1;
+		gbc.gridy = 8;
+		add(excluir, gbc);
 
 	}
 
-	private Object organizarEventos() {
+	private void organizarEventos() {
+		carregarListaModalidades();
+		
 		salvar.addActionListener((event) -> {
-			if (inputNome.getText().isEmpty() || inputValor.getText().isEmpty() || inputInstrutor.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
+			if (inputNome.getText().isEmpty() || inputValor.getText().isEmpty() || inputIdInstrutor.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			
-			if(listaInstrutores.getSize() <= 0) {
-				JOptionPane.showMessageDialog(null, "Cadastre ao menos um instrutor para atrelá-lo a uma modalidade.");
-				return;
-			}
-
+			Modalidade modalidade = new Modalidade();
+			
 			String nome = inputNome.getText();
 			double valor = Double.parseDouble(inputValor.getText());
-			String nomeInstrutor = inputInstrutor.getText();
+			int idInstrutor = Integer.parseInt(inputIdInstrutor.getText());
 			
+			Instrutor instrutorCarregado = new Instrutor();
 			
-			for (int y = 0; y < listaInstrutores.getSize(); y++) {
-				System.out.println(listaInstrutores.getOne(y).getNome());
-				if (nomeInstrutor.equals(listaInstrutores.getOne(y).getNome())) {
-					Instrutor instrutor = listaInstrutores.getOne(y);
-					Modalidade modalidade = new Modalidade(nome, valor, instrutor);
-					listaModalidades.adicionar(modalidade);
+			instrutorCarregado = instrutorDAO.getInstrutor(idInstrutor);
+			
+			if(instrutorDAO.getInstrutor(idInstrutor) != null) {
+				modalidade.setIdinstrutor(idInstrutor);
+				modalidade.setNome(nome);
+				modalidade.setValor(valor);
+				
+				if(modalidadeDAO.salvarModalidade(modalidade, idInstrutor)) {
+					inputNome.setText("");
+					inputValor.setText("");
+					inputIdInstrutor.setText("");
+					
+					carregarListaModalidades();
+					
+					JOptionPane.showMessageDialog(this, "Modalidade cadastrada com sucesso.");
 				} else {
-					JOptionPane.showMessageDialog(null, "Digite um nome de instrutor válido.");
-					return;
+					JOptionPane.showMessageDialog(this, "Erro ao cadastrar modalidade.", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
-			}
-
-			modelo.setRowCount(0);
-
-			for (int i = 0; i < listaModalidades.getSize(); i++) {
-				Object[] lista = { listaModalidades.getOne(i).getNome(), listaModalidades.getOne(i).getValor(),
-						listaModalidades.getOne(i).getInstrutor().getNome() };
-
-				modelo.addRow(lista);
-			}
-
-			inputNome.setText("");
-			inputValor.setText("");
-			inputInstrutor.setText("");
-		});
-
-		selecionarLinha.addActionListener((event) -> {
-			int linhaSelecionada = tabelaModalidades.getSelectedRow();
-			if (linhaSelecionada != -1) {
-				inputNome.setText(tabelaModalidades.getValueAt(linhaSelecionada, 0).toString());
-				inputValor.setText(tabelaModalidades.getValueAt(linhaSelecionada, 1).toString());
-				inputInstrutor.setText(tabelaModalidades.getValueAt(linhaSelecionada, 2).toString());
-				editar.setVisible(true);
+				
 			} else {
-				JOptionPane.showMessageDialog(null, "Selecione uma modalidade.");
-			}
-		});
-
-		editar.addActionListener((event) -> {
-			if (inputNome.getText().isEmpty() || inputValor.getText().isEmpty() || inputInstrutor.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
-				return;
-			}
-
-			int linhaSelecionada = tabelaModalidades.getSelectedRow();
-
-			String nome = inputNome.getText();
-			double valor = Double.parseDouble(inputValor.getText());
-			String nomeInstrutor = inputInstrutor.getText();
-
-			for (int y = 0; y < listaInstrutores.getSize(); y++) {
-				System.out.println(listaInstrutores.getOne(y).getNome());
-				if (nomeInstrutor.equals(listaInstrutores.getOne(y).getNome())) {
-					Instrutor instrutor = listaInstrutores.getOne(y);
-					Modalidade modalidadeEditada = new Modalidade(nome, valor, instrutor);
-
-					listaModalidades.editRegister(linhaSelecionada, modalidadeEditada);
-				} else {
-					JOptionPane.showMessageDialog(null, "Digite um nome de instrutor válido.");
-					return;
-				}
+				JOptionPane.showMessageDialog(this, "Verifique o ID de instrutor e tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 			
-			tabelaModalidades.setValueAt(nome, linhaSelecionada, 0);
-			tabelaModalidades.setValueAt(valor, linhaSelecionada, 1);
-			tabelaModalidades.setValueAt(nomeInstrutor, linhaSelecionada, 2);
+		});
+		
+		editar.addActionListener((event) -> {
 
-			inputNome.setText("");
-			inputValor.setText("");
-			inputInstrutor.setText("");
-
-			editar.setVisible(false);
 		});
 
 		excluir.addActionListener((event) -> {
-			int linhaSelecionada = tabelaModalidades.getSelectedRow();
-			if (linhaSelecionada != -1) {
-				listaModalidades.removeRegister(linhaSelecionada);
-				modelo.removeRow(linhaSelecionada);
-			} else {
-				JOptionPane.showMessageDialog(null, "Selecione uma modalidade para ser excluída.");
-				return;
-			}
+
 		});
-		return null;
-
 	}
-
-	private void finalizar() {
-		setVisible(true);
+	
+	private void carregarListaModalidades() {
+		listaModalidades = modalidadeDAO.listarModalidades();
+		
+		modelo.setRowCount(0);
+		
+		for(int i = 0; i < listaModalidades.size(); i++) {
+			Object[] lista = {
+					listaModalidades.get(i).getId(),
+					listaModalidades.get(i).getNome(),
+					listaModalidades.get(i).getValor(),
+					listaModalidades.get(i).getNomeInstrutor()
+			};
+			
+			modelo.addRow(lista);
+		}
 	}
 }

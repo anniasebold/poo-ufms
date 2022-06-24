@@ -2,12 +2,17 @@ package model;
 
 public class Modalidade extends Entidade {
 	private double valor;
-	private Instrutor instrutor;
+	private int Idinstrutor;
+	private String nomeInstrutor;
 	
-	public Modalidade(String nome, double valor, Instrutor instrutor) {
-		super(nome);
+	public Modalidade() {
+		super();
+	}
+	
+	public Modalidade(int id, String nome, double valor, int idInstrutor) {
+		super(id, nome);
 		setValor(valor);
-		setInstrutor(instrutor);
+		setIdinstrutor(idInstrutor);
 	}
 
 	public double getValor() {
@@ -17,13 +22,23 @@ public class Modalidade extends Entidade {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
-	public Instrutor getInstrutor() {
-		return instrutor;
+
+	public int getIdinstrutor() {
+		return Idinstrutor;
 	}
 
-	public void setInstrutor(Instrutor instrutor) {
-		this.instrutor = instrutor;
+	public void setIdinstrutor(int idInstrutor) {
+		this.Idinstrutor = idInstrutor;
 	}
+
+	public String getNomeInstrutor() {
+		return nomeInstrutor;
+	}
+
+	public void setNomeInstrutor(String nomeInstrutor) {
+		this.nomeInstrutor = nomeInstrutor;
+	}
+	
+	
 
 }

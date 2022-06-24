@@ -5,8 +5,12 @@ public class Equipamento extends Entidade {
 	private String musculoTrab;
 	private String estado;
 	
-	public Equipamento(String nome, String musculoTrab, String estado) {
-		super(nome);
+	public Equipamento() {
+		super();
+	}
+	
+	public Equipamento(int id, String nome, String musculoTrab, String estado) {
+		super(id, nome);
 		setMusculoTrab(musculoTrab);
 		setEstado(estado);
 	}

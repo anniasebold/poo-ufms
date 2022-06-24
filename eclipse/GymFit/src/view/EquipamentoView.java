@@ -3,6 +3,7 @@ package view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.EquipamentoDAO;
 import controller.EquipamentoListagem;
 import model.Equipamento;
 
@@ -22,25 +24,28 @@ public class EquipamentoView extends JPanel {
 	private JLabel nome;
 	private JLabel musculoTrab;
 	private JLabel estado;
+	private JLabel id;
 	private JTextField inputNome;
 	private JTextField inputMusculoTrab;
 	private JTextField inputEstado;
+	private JTextField inputID;
 	private JButton salvar;
 	private JButton editar;
 	private JButton excluir;
-	private JButton selecionarLinha;
 
 	private JTable tabelaEquipamentos = new JTable();
-	EquipamentoListagem listaEquipamentos = new EquipamentoListagem();
-
-	String colunas[] = { "Nome", "Músculo Trabalhado", "Estado" };
+	
+	EquipamentoDAO equipamentoDAO = new EquipamentoDAO();
+	private ArrayList<Equipamento> listaEquipamentos = new ArrayList<Equipamento>();
+	private boolean cadastro = true;
+	
+	String colunas[] = { "ID", "Nome", "Músculo Trabalhado", "Estado" };
 	DefaultTableModel modelo = new DefaultTableModel(colunas, 0);
 
 	public EquipamentoView() {
 		prepararJanela();
 		organizarComponentes();
 		organizarEventos();
-//		finalizar();
 	}
 
 	public void prepararJanela() {
@@ -56,137 +61,177 @@ public class EquipamentoView extends JPanel {
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		add(titulo, gbc);
+		id = new JLabel("ID");
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		add(id, gbc);
+		
+		inputID = new JTextField(30);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		add(inputID, gbc);
+		inputID.setEditable(false);
 
 		nome = new JLabel("Nome ");
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		add(nome, gbc);
 
 		inputNome = new JTextField(30);
 		gbc.gridx = 1;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		add(inputNome, gbc);
 
 		musculoTrab = new JLabel("Músculo Trabalhado ");
 		gbc.gridx = 0;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		add(musculoTrab, gbc);
 		
 		inputMusculoTrab = new JTextField(30);
 		gbc.gridx = 1;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		add(inputMusculoTrab, gbc);
 
 		estado = new JLabel("Estado ");
 		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		add(estado, gbc);
 
 		inputEstado = new JTextField(30);
 		gbc.gridx = 1;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		add(inputEstado, gbc);
 
 		salvar = new JButton("Salvar");
 		gbc.gridx = 1;
-		gbc.gridy = 4;
-		add(salvar, gbc);
-
-		selecionarLinha = new JButton("Selecionar Registro");
-		gbc.gridx = 1;
 		gbc.gridy = 5;
-		add(selecionarLinha, gbc);
-
-		editar = new JButton("Editar");
-		gbc.gridx = 1;
-		gbc.gridy = 6;
-		add(editar, gbc);
-		editar.setVisible(false);
-
-		excluir = new JButton("Excluir");
-		gbc.gridx = 1;
-		gbc.gridy = 7;
-		add(excluir, gbc);
+		add(salvar, gbc);
 
 		tabelaEquipamentos.setModel(modelo);
 		tabelaEquipamentos.setVisible(true);
 
 		gbc.gridx = 1;
-		gbc.gridy = 9;
+		gbc.gridy = 6;
 		add(new JScrollPane(tabelaEquipamentos), gbc);
+		
+		editar = new JButton("Editar");
+		gbc.gridx = 1;
+		gbc.gridy = 7;
+		add(editar, gbc);
+		
+		excluir = new JButton("Excluir");
+		gbc.gridx = 1;
+		gbc.gridy = 8;
+		add(excluir, gbc);
 
 	}
 	
 	private void organizarEventos() {
+		carregarListaEquipamentos();
 		salvar.addActionListener((event) -> {
+			if (inputNome.getText().isEmpty() || inputMusculoTrab.getText().isEmpty() || inputEstado.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
 			String nome = inputNome.getText();
 			String musculoTrab = inputMusculoTrab.getText();
 			String estado = inputEstado.getText();
-
-			Equipamento equipamento = new Equipamento(nome, musculoTrab, estado);
-			listaEquipamentos.adicionar(equipamento);
-
-			inputNome.setText("");
-			inputMusculoTrab.setText("");
-			inputEstado.setText("");
-			modelo.setRowCount(0);
-
-			for (int i = 0; i < listaEquipamentos.getSize(); i++) {
-				Object[] lista = { 
-						listaEquipamentos.getOne(i).getNome(), 
-						listaEquipamentos.getOne(i).getMusculoTrab(), 
-						listaEquipamentos.getOne(i).getEstado(), 
-				};
-
-				modelo.addRow(lista);
-			}
-		});
-
-		selecionarLinha.addActionListener((event) -> {
-			int linhaSelecionada = tabelaEquipamentos.getSelectedRow();
-			if (linhaSelecionada != -1) {
-				inputNome.setText(tabelaEquipamentos.getValueAt(linhaSelecionada, 0).toString());
-				inputMusculoTrab.setText(tabelaEquipamentos.getValueAt(linhaSelecionada, 1).toString());
-				inputEstado.setText(tabelaEquipamentos.getValueAt(linhaSelecionada, 2).toString());
-				editar.setVisible(true);
+			
+			Equipamento equipamento = new Equipamento();
+			equipamento.setNome(nome);
+			equipamento.setMusculoTrab(musculoTrab);
+			equipamento.setEstado(estado);
+			
+			if(cadastro) {
+				if(equipamentoDAO.salvarEquipamento(equipamento)) {
+					JOptionPane.showMessageDialog(this, "Equipamento cadastrado com sucesso.");
+				} else {
+					JOptionPane.showMessageDialog(this, "Erro ao cadastrar Equipamento.", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				carregarListaEquipamentos();
+				inputNome.setText("");
+				inputMusculoTrab.setText("");
+				inputEstado.setText("");
 			} else {
-				JOptionPane.showMessageDialog(null, "Selecione um equipamento.");
+				int idEquipamento = Integer.parseInt(inputID.getText());
+				equipamento.setId(idEquipamento);
+				
+				if(equipamentoDAO.editarEquipamento(equipamento)) {
+					JOptionPane.showMessageDialog(this, "Equipamento editado com sucesso.");
+				} else {
+					JOptionPane.showMessageDialog(this, "Erro ao editar Equipamento.", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				carregarListaEquipamentos();
+				
+				inputID.setText("");
+				inputNome.setText("");
+				inputMusculoTrab.setText("");
+				inputEstado.setText("");
+				
+				cadastro = true;
 			}
 		});
 
 		editar.addActionListener((event) -> {
+			cadastro = false;
 			int linhaSelecionada = tabelaEquipamentos.getSelectedRow();
-
-			String nome = inputNome.getText();
-			String musculoTrab = inputMusculoTrab.getText();
-			String estado = inputEstado.getText();
-			Equipamento equipamentoEditado = new Equipamento(nome, musculoTrab, estado);
-
-			inputNome.setText("");
-			inputMusculoTrab.setText("");
-			inputEstado.setText("");
-
-			listaEquipamentos.editRegister(linhaSelecionada, equipamentoEditado);
-
-			tabelaEquipamentos.setValueAt(nome, linhaSelecionada, 0);
-			tabelaEquipamentos.setValueAt(musculoTrab, linhaSelecionada, 1);
-			tabelaEquipamentos.setValueAt(estado, linhaSelecionada, 2);
+			Equipamento equipamentoCarregado = new Equipamento();
+			
+			if(linhaSelecionada != -1) {
+				int idEquipamento = (int) tabelaEquipamentos.getValueAt(linhaSelecionada, 0);
+				
+				equipamentoCarregado = equipamentoDAO.getEquipamento(idEquipamento);
+				
+				inputID.setText(String.valueOf(equipamentoCarregado.getId()));
+				inputNome.setText(equipamentoCarregado.getNome());
+				inputMusculoTrab.setText(equipamentoCarregado.getMusculoTrab());
+				inputEstado.setText(equipamentoCarregado.getEstado());
+				
+			} else {
+				JOptionPane.showMessageDialog(this, "Selecione um equipamento para ser editado.", "Erro", JOptionPane.ERROR_MESSAGE);
+			}
 
 		});
 
 		excluir.addActionListener((event) -> {
 			int linhaSelecionada = tabelaEquipamentos.getSelectedRow();
+			
+			
 			if (linhaSelecionada != -1) {
-				listaEquipamentos.removeRegister(linhaSelecionada);
-				modelo.removeRow(linhaSelecionada);
+				int idEquipamento = (int) tabelaEquipamentos.getValueAt(linhaSelecionada, 0);
+				
+				if(equipamentoDAO.removerEquipamento(idEquipamento)) {
+					
+					carregarListaEquipamentos();
+					JOptionPane.showMessageDialog(this, "Equipamento excluído com sucesso.");
+				} else {
+					JOptionPane.showMessageDialog(this, "Erro ao excluir instrutor.", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
 			} else {
-				JOptionPane.showMessageDialog(null, "Selecione um equipamento para ser excluído.");
+				JOptionPane.showMessageDialog(null, "Selecione um equipamento para ser excluído.", "Erro", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		
 	}
-
-	private void finalizar() {
-		setVisible(true);
+	
+	public void carregarListaEquipamentos() {
+		listaEquipamentos = equipamentoDAO.listarEquipamentos();
+		
+		modelo.setRowCount(0);
+		
+		for (int i = 0; i < listaEquipamentos.size(); i++) {
+			Object[] lista = { 
+					listaEquipamentos.get(i).getId(),
+					listaEquipamentos.get(i).getNome(), 
+					listaEquipamentos.get(i).getMusculoTrab(), 
+					listaEquipamentos.get(i).getEstado(), 
+			};
+	
+			modelo.addRow(lista);
+		}
 	}
+	
 }
