@@ -7,11 +7,20 @@ public class Gentileza {
         }
       });
 
-      // mb.vamosBacanar(
-      //     (b) -> { 
-      //         System.out.println("Sou muito bacana! Vou doar... " + b + " reais");
-      //     }
-      // );
+      Bacana bacana = new Bacana() {
+        public void serGentil(int bonzinho) {
+          System.out.println("Vou doar " + bonzinho);
+        }
+      };
+
+      bacana.serGentil(100);
+
+      mb.vamosBacanar(
+        (b) -> { 
+          System.out.println("Sou muito bacana! Vou doar... " + b + " reais");
+        }
+      );
+      
   }
 }
 
